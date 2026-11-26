@@ -465,4 +465,3148 @@
               class="px-3.5 py-2.5 rounded-xl bg-[#EF4A1E] hover:bg-[#d63d14] text-white font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-1.5 cursor-pointer"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.41
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              <span>PDF</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="logoutAdmin()"
+              class="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm transition cursor-pointer"
+            >
+              Salir
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtros Dinámicos: Empresa, Área, Rol, Regional, Antigüedad y Edad -->
+        <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <span class="text-xs font-bold uppercase text-slate-500">Filtros:</span>
+
+            <!-- Filtro Empresa -->
+            <select
+              id="admin-company-filter"
+              onchange="handleAdminFilterChange('company')"
+              class="text-xs sm:text-sm font-semibold rounded-xl border border-slate-300 px-3 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA]"
+            >
+              <option value="ALL">Todas las Empresas (Consolidado)</option>
+              <option value="Farmacias Chávez">Farmacias Chávez</option>
+              <option value="Quimiza">Quimiza</option>
+              <option value="Consultorios Médicos Chávez">Consultorios Médicos Chávez</option>
+            </select>
+
+            <!-- Filtro Área -->
+            <select
+              id="admin-area-filter"
+              onchange="handleAdminFilterChange('area')"
+              class="text-xs sm:text-sm font-semibold rounded-xl border border-slate-300 px-3 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA] max-w-[240px]"
+            >
+              <option value="ALL">Todas las Áreas</option>
+            </select>
+
+            <!-- Filtro Rol / Equipo -->
+            <select
+              id="admin-role-filter"
+              onchange="handleAdminFilterChange('role')"
+              class="text-xs sm:text-sm font-semibold rounded-xl border border-slate-300 px-3 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA] max-w-[240px]"
+            >
+              <option value="ALL">Todos los Roles / Equipos</option>
+            </select>
+
+            <!-- Filtro Regional -->
+            <select
+              id="admin-regional-filter"
+              onchange="handleAdminFilterChange('regional')"
+              class="text-xs sm:text-sm font-semibold rounded-xl border border-slate-300 px-3 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA] max-w-[220px]"
+            >
+              <option value="ALL">Todas las Regionales</option>
+            </select>
+
+            <!-- Filtro Antigüedad -->
+            <select
+              id="admin-tenure-filter"
+              onchange="handleAdminFilterChange('tenure')"
+              class="text-xs sm:text-sm font-semibold rounded-xl border border-slate-300 px-3 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA] max-w-[210px]"
+            >
+              <option value="ALL">Todas las Antigüedades</option>
+              <option value="Menos de 3 meses">Menos de 3 meses</option>
+              <option value="De 3 meses a 1 año">De 3 meses a 1 año</option>
+              <option value="De 1 a 3 años">De 1 a 3 años</option>
+              <option value="Más de 3 años">Más de 3 años</option>
+              <option value="Más de 5 años">Más de 5 años</option>
+            </select>
+
+            <!-- Filtro Edad -->
+            <select
+              id="admin-age-filter"
+              onchange="handleAdminFilterChange('age')"
+              class="text-xs sm:text-sm font-semibold rounded-xl border border-slate-300 px-3 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA] max-w-[210px]"
+            >
+              <option value="ALL">Todos los Rangos de Edad</option>
+              <option value="Entre 19 y 22 años">Entre 19 y 22 años</option>
+              <option value="Entre 22 y 25 años">Entre 22 y 25 años</option>
+              <option value="Entre 25 y 30 años">Entre 25 y 30 años</option>
+              <option value="Entre 31 y 40 años">Entre 31 y 40 años</option>
+              <option value="Entre 41 y 49 años">Entre 41 y 49 años</option>
+              <option value="Entre 50 años o más">Entre 50 años o más</option>
+            </select>
+
+            <button
+              type="button"
+              onclick="resetAdminFilters()"
+              class="text-xs font-bold px-3 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-600 transition cursor-pointer"
+              title="Restablecer todos los filtros"
+            >
+              Limpiar filtros
+            </button>
+          </div>
+
+          <span id="last-sync-label" class="text-xs text-slate-500 font-medium">
+            Sin sincronizar aún
+          </span>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ÁREA CAPTURABLE DEL DASHBOARD PARA IMAGEN PNG Y PDF               -->
+      <!-- ================================================================= -->
+      <div id="dashboard-capture-area" class="space-y-6 bg-[#E7E7E7] p-1 rounded-2xl">
+
+        <!-- Tarjeta de KPIs Ejecutivos -->
+        <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900">Indicadores Clave · Medición de Clima Laboral 2026</h3>
+              <p id="dashboard-subtitle-filter" class="text-xs text-slate-500">Vista consolidada: Todas las empresas del Grupo Chávez</p>
+            </div>
+            <span id="dashboard-export-date" class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600"></span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-7 gap-3">
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <p class="text-[11px] font-bold uppercase text-slate-500">Encuestas</p>
+              <p id="kpi-total" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">0</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-sky-50/70 border border-sky-200/80">
+              <p class="text-[11px] font-bold uppercase text-[#0A9CDA]">Farmacias Ch.</p>
+              <p id="kpi-fc" class="text-2xl sm:text-3xl font-extrabold text-[#064C69] mt-1">0</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-orange-50/70 border border-orange-200/80">
+              <p class="text-[11px] font-bold uppercase text-[#EF4A1E]">Quimiza</p>
+              <p id="kpi-qz" class="text-2xl sm:text-3xl font-extrabold text-[#EF4A1E] mt-1">0</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-cyan-50/70 border border-cyan-200/80">
+              <p class="text-[11px] font-bold uppercase text-sky-800">Consultorios</p>
+              <p id="kpi-censal" class="text-2xl sm:text-3xl font-extrabold text-sky-800 mt-1">0</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80">
+              <p class="text-[11px] font-bold uppercase text-emerald-700">Índice Global</p>
+              <div class="flex items-baseline gap-1 mt-1">
+                <p id="kpi-avg" class="text-2xl sm:text-3xl font-extrabold text-emerald-700">0.00</p>
+                <span class="text-xs text-emerald-600 font-bold">/ 5</span>
+              </div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-200/80">
+              <p class="text-[11px] font-bold uppercase text-indigo-700">Favorabilidad</p>
+              <p id="kpi-favorability" class="text-2xl sm:text-3xl font-extrabold text-indigo-700 mt-1">0%</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/90 col-span-2 sm:col-span-1">
+              <p class="text-[11px] font-bold uppercase text-amber-800">eNPS (Lealtad)</p>
+              <p id="kpi-nps" class="text-2xl sm:text-3xl font-extrabold text-amber-800 mt-1">0</p>
+              <p id="kpi-nps-detail" class="text-[10px] text-amber-700 font-medium mt-0.5">P: 0% · D: 0%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila 1 de Gráficas: Puntaje por 6 Dimensiones + Participación por Empresa -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div class="lg:col-span-2 bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-800">
+                Índice por Dimensión de Clima (Escala 1.00 – 5.00)
+              </h3>
+              <span class="text-[11px] font-semibold text-slate-400">Meta &ge; 4.00</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">Promedio ponderado en las 6 dimensiones evaluadas</p>
+            <div class="relative h-72 w-full">
+              <canvas id="chart-dimensions"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6 flex flex-col">
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-1">
+              Participación por Empresa
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Distribución porcentual de encuestados</p>
+            <div class="relative flex-1 min-h-[220px] w-full flex items-center justify-center">
+              <canvas id="chart-companies"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila 2 de Gráficas: Distribución de Frecuencias + Ranking Bienestar -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6">
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-1">
+              Distribución de Frecuencia Global (%)
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Porcentaje de respuestas emitidas por nivel de escala</p>
+            <div class="relative h-60 w-full">
+              <canvas id="chart-frequency"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6">
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-1">
+              Bienestar Organizacional Valorado
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Preferencia de actividades por cantidad de votos</p>
+            <div class="relative h-60 w-full">
+              <canvas id="chart-wellness"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila 3: Análisis de Respuestas Abiertas (Positivas / Fortalezas y Negativas / Críticas) -->
+        <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#064C69]">Análisis Cualitativo · Preguntas Abiertas</span>
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mt-0.5">
+                Hallazgos Clave: Casos Críticos, Oportunidades de Mejora y Fortalezas
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">
+                Clasificación automática vinculada a los filtros activos (Empresa, Área, Rol, Regional, Antigüedad y Edad)
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+              <span id="open-badge-critical" class="px-3 py-1.5 rounded-xl bg-red-50 text-red-700 border border-red-200">
+                0 Críticas
+              </span>
+              <span id="open-badge-negative" class="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 border border-amber-200">
+                0 Oportunidades / Negativas
+              </span>
+              <span id="open-badge-positive" class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
+                0 Fortalezas / Positivas
+              </span>
+            </div>
+          </div>
+
+          <div id="open-themes-bar" class="flex flex-wrap items-center gap-2 text-xs"></div>
+
+          <!-- Bloque 1: Alertas Críticas Destacadas -->
+          <div class="rounded-2xl border-2 border-red-200 bg-red-50/45 p-4 sm:p-5 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </span>
+                <div>
+                  <h4 class="text-sm font-extrabold text-red-900 uppercase tracking-wide">
+                    Respuestas Críticas Destacadas (Prioridad Alta)
+                  </h4>
+                  <p class="text-[11px] text-red-700">
+                    Comentarios con señales de alerta en clima, liderazgo, sobrecarga o clima cuantitativo crítico (&le; 3.00)
+                  </p>
+                </div>
+              </div>
+              <span id="critical-stored-counter" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red-100 text-red-800 border border-red-300">
+                0 almacenadas en vista actual
+              </span>
+            </div>
+
+            <div id="open-critical-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+          </div>
+
+          <!-- Bloque 2: Comparativa lado a lado -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="rounded-2xl border border-emerald-200 bg-emerald-50/35 p-4 sm:p-5 flex flex-col">
+              <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-emerald-200/70">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <h4 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-emerald-900">
+                    Respuestas Positivas · Fortalezas
+                  </h4>
+                </div>
+                <span id="positive-list-count" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">0</span>
+              </div>
+              <div id="open-positive-list" class="space-y-2.5 max-h-[380px] overflow-y-auto pr-1"></div>
+            </div>
+
+            <div class="rounded-2xl border border-amber-200 bg-amber-50/35 p-4 sm:p-5 flex flex-col">
+              <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-amber-200/70">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-lg bg-[#D95D1E] text-white flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <h4 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-amber-950">
+                    Oportunidades de Mejora y Sugerencias
+                  </h4>
+                </div>
+                <span id="negative-list-count" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">0</span>
+              </div>
+              <div id="open-negative-list" class="space-y-2.5 max-h-[380px] overflow-y-auto pr-1"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tabla Detallada de Registros en Línea -->
+      <div class="bg-white rounded-2xl shadow-xs border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-800">
+              Detalle de Respuestas Almacenadas en Línea
+            </h3>
+            <p class="text-xs text-slate-500">Para eliminar o editar filas permanentemente, puedes hacerlo directo en tu Google Sheet vinculado</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase text-[11px]">
+                <th class="py-3 px-4">Fecha / Hora</th>
+                <th class="py-3 px-4">Empresa</th>
+                <th class="py-3 px-4">Área / Rol</th>
+                <th class="py-3 px-4">Perfil (Antigüedad / Edad / Cargo)</th>
+                <th class="py-3 px-4 text-center">Índice</th>
+                <th class="py-3 px-4 text-center">eNPS</th>
+                <th class="py-3 px-4">Fortalezas / Mejoras</th>
+              </tr>
+            </thead>
+            <tbody id="admin-records-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="max-w-3xl w-full mx-auto px-4 sm:px-6 py-6 text-center text-xs text-slate-500">
+    Medición de Clima Laboral 2026 · Grupo Chávez (Farmacias Chávez · Quimiza · Consultorio Médico Chávez)
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODALES                                                               -->
+  <!-- ===================================================================== -->
+
+  <!-- Modal 1: Inicio de Sesión Administrador (Validación del lado del servidor) -->
+  <div id="admin-login-modal" class="hidden fixed inset-0 z-50 bg-slate-900/55 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200 animate-section">
+      <div class="px-6 py-4 bg-[#064C69] text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-sky-300" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <h3 class="text-base font-bold">Acceso Administrador Seguro</h3>
+        </div>
+        <button type="button" onclick="closeAdminModal()" class="text-white/75 hover:text-white p-1 rounded-lg cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="p-6 space-y-4">
+        <p class="text-xs text-slate-500">
+          Las credenciales se verifican directamente contra el servidor protegido en la nube. Las respuestas permanecen ocultas hasta autenticar la sesión.
+        </p>
+
+        <div id="admin-login-error" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700">
+          Usuario o contraseña incorrectos, o servidor no disponible.
+        </div>
+
+        <div>
+          <label for="admin-email-input" class="block text-xs font-bold text-slate-700 mb-1">Usuario Administrador</label>
+          <input
+            type="email"
+            id="admin-email-input"
+            required
+            autocomplete="username"
+            placeholder="admin@grupochavez.com"
+            class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA]"
+          />
+        </div>
+
+        <div>
+          <label for="admin-pass-input" class="block text-xs font-bold text-slate-700 mb-1">Contraseña</label>
+          <input
+            type="password"
+            id="admin-pass-input"
+            required
+            autocomplete="current-password"
+            placeholder="••••••••••••"
+            class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA]"
+          />
+        </div>
+
+        <div class="pt-2 flex justify-end gap-2.5">
+          <button type="button" onclick="closeAdminModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-sm font-semibold hover:bg-slate-50 cursor-pointer">
+            Cancelar
+          </button>
+          <button type="submit" id="btn-admin-submit" class="px-5 py-2.5 rounded-xl bg-[#064C69] hover:bg-[#053b52] text-white text-sm font-bold shadow-sm transition cursor-pointer disabled:opacity-60">
+            Validar e Ingresar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Confirmación Borrar Formulario en Curso -->
+  <div id="clear-form-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 animate-section">
+      <h3 class="text-lg font-bold text-slate-900">¿Borrar respuestas del formulario?</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Se limpiarán tus selecciones actuales y volverás a la Sección 1.
+      </p>
+      <div class="mt-6 flex justify-end gap-3">
+        <button type="button" onclick="closeClearModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-sm font-semibold hover:bg-slate-50 cursor-pointer">
+          Cancelar
+        </button>
+        <button type="button" onclick="executeClearForm()" class="px-4 py-2 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 cursor-pointer">
+          Sí, borrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Configuración y Código del Servidor En Línea (Google Sheets + Seguridad) -->
+  <div id="webhook-config-modal" class="hidden fixed inset-0 z-50 bg-slate-900/55 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-section">
+      <div class="px-6 py-4 bg-[#064C69] text-white flex items-center justify-between">
+        <h3 class="text-base font-bold">Conexión Segura en Línea (Google Apps Script)</h3>
+        <button type="button" onclick="closeWebhookModal()" class="text-white/75 hover:text-white p-1 rounded-lg cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-6 space-y-4 max-h-[82vh] overflow-y-auto">
+        <div class="p-3.5 rounded-xl bg-sky-50 border border-sky-200 text-xs text-slate-700 space-y-1.5">
+          <p class="font-bold text-[#064C69]">Instrucciones de Seguridad y Sincronización:</p>
+          <ol class="list-decimal list-inside space-y-1">
+            <li>En tu Google Sheet, abre <strong>Extensiones &rarr; Apps Script</strong> y pega el código actualizado de abajo.</li>
+            <li>La contraseña de administrador vive únicamente dentro de Apps Script (en <code class="font-mono text-[#EF4A1E]">ADMIN_PASS</code>) y nunca se expone en el código HTML público.</li>
+            <li>Además, los datos no se descargan al navegador hasta que el servidor valida tu correo y contraseña.</li>
+          </ol>
+        </div>
+
+        <div>
+          <label for="webhook-url-input" class="block text-xs font-bold text-slate-700 mb-1">URL Web App de Google Apps Script (En Línea)</label>
+          <input
+            type="url"
+            id="webhook-url-input"
+            placeholder="https://script.google.com/macros/s/AKfycb.../exec"
+            class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0A9CDA]"
+          />
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-slate-700">Código Seguro para Google Apps Script (Backend):</span>
+            <button type="button" onclick="copyAppsScriptCode()" class="text-xs font-bold text-[#0A9CDA] hover:underline cursor-pointer">
+              Copiar código Apps Script
+            </button>
+          </div>
+          <textarea
+            id="apps-script-template"
+            rows="9"
+            readonly
+            class="w-full rounded-xl border border-slate-300 bg-slate-900 text-emerald-300 p-3 text-[11px] font-mono focus:outline-none"
+          >var ADMIN_EMAIL = "admin@grupochavez.com";
+var ADMIN_PASS  = "Clima2026#Admin"; // Cambiar aquí en el servidor privado de Google
+
+function doPost(e) {
+  var payload = JSON.parse(e.postData.contents);
+
+  // 1. Endpoint protegido: Solo devuelve registros si el correo y contraseña coinciden
+  if (payload.action === "admin_fetch") {
+    if (String(payload.email || "").toLowerCase().trim() !== ADMIN_EMAIL.toLowerCase() ||
+        String(payload.password || "") !== ADMIN_PASS) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "unauthorized" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    var rows = sheet.getDataRange().getValues();
+    var records = [];
+    if (rows.length > 1) {
+      var jsonColIdx = rows[0].indexOf("JSON_RAW");
+      if (jsonColIdx === -1) jsonColIdx = rows[0].length - 1;
+      for (var i = 1; i < rows.length; i++) {
+        var jsonRaw = rows[i][jsonColIdx];
+        if (jsonRaw) {
+          try { records.push(JSON.parse(jsonRaw)); } catch (err) {}
+        }
+      }
+    }
+    return ContentService.createTextOutput(JSON.stringify({ status: "ok", records: records }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // 2. Guardado público anónimo de encuesta (solo escritura, sin lectura)
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  var data = payload;
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      'ID', 'Fecha_Hora', 'Empresa', 'Area', 'Rol', 'Regional', 'Zona',
+      'Antiguedad', 'Rango_Edad', 'Personal_A_Cargo',
+      'P20_1_Txt', 'P20_2_Txt', 'P20_3_Txt',
+      'P21_1_Txt', 'P21_2_Txt', 'P21_3_Txt',
+      'P22_1_Txt', 'P22_2_Txt', 'P22_3_Txt',
+      'P23_1_Txt', 'P23_2_Txt', 'P23_3_Txt',
+      'P24_1_Txt', 'P24_2_Txt', 'P24_3_Txt', 'P24_4_Txt',
+      'P29_1_Txt', 'P29_2_Txt', 'P29_3_Txt', 'P29_4_Txt', 'P29_5_Txt',
+      'P20_1_Num', 'P20_2_Num', 'P20_3_Num',
+      'P21_1_Num', 'P21_2_Num', 'P21_3_Num',
+      'P22_1_Num', 'P22_2_Num', 'P22_3_Num',
+      'P23_1_Num', 'P23_2_Num', 'P23_3_Num',
+      'P24_1_Num', 'P24_2_Num', 'P24_3_Num', 'P24_4_Num',
+      'P29_1_Num', 'P29_2_Num', 'P29_3_Num', 'P29_4_Num', 'P29_5_Num',
+      'Prom_Compromiso', 'Prom_Servicio', 'Prom_Sinergia', 'Prom_Credibilidad',
+      'Prom_Eficiencia', 'Prom_Alineacion', 'Promedio_General',
+      'P25_Bienestar', 'P26_Sugerencias', 'P27_Fortalezas', 'P28_Mejoras',
+      'NPS_Puntaje', 'NPS_Categoria', 'JSON_RAW'
+    ]);
+  }
+  var t = data.matrixTexts || {};
+  var n = data.matrixNums || {};
+  sheet.appendRow([
+    data.localId, data.fechaHora, data.empresa, data.area, data.rol, data.regional, data.zona,
+    data.antiguedad, data.rangoEdad, data.personalCargo,
+    t.q20_1, t.q20_2, t.q20_3, t.q21_1, t.q21_2, t.q21_3, t.q22_1, t.q22_2, t.q22_3,
+    t.q23_1, t.q23_2, t.q23_3, t.q24_1, t.q24_2, t.q24_3, t.q24_4,
+    t.q29_1, t.q29_2, t.q29_3, t.q29_4, t.q29_5,
+    n.q20_1, n.q20_2, n.q20_3, n.q21_1, n.q21_2, n.q21_3, n.q22_1, n.q22_2, n.q22_3,
+    n.q23_1, n.q23_2, n.q23_3, n.q24_1, n.q24_2, n.q24_3, n.q24_4,
+    n.q29_1, n.q29_2, n.q29_3, n.q29_4, n.q29_5,
+    data.promCompromiso, data.promServicio, data.promSinergia, data.promCredibilidad,
+    data.promEficiencia, data.promAlineacion, data.promedioGeneral,
+    data.p25Bienestar, data.p26Sugerencias, data.p27Fortalezas, data.p28Mejoras,
+    data.npsScore, data.npsCategory, JSON.stringify(data)
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok' })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Bloqueamos cualquier lectura pública directa por GET por seguridad
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({ status: 'forbidden' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}</textarea>
+        </div>
+
+        <div class="flex flex-wrap justify-end items-center gap-2 pt-2">
+          <button type="button" onclick="closeWebhookModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs sm:text-sm font-semibold hover:bg-slate-50 cursor-pointer">
+            Cerrar
+          </button>
+          <button type="button" onclick="saveWebhookUrl()" class="px-4 py-2 rounded-xl bg-[#0A9CDA] hover:bg-[#0886bd] text-white text-xs sm:text-sm font-bold shadow-sm transition cursor-pointer">
+            Guardar y Sincronizar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Vista previa de Imagen Exportada -->
+  <div id="image-preview-modal" class="hidden fixed inset-0 z-50 bg-slate-900/65 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-section">
+      <div class="px-6 py-4 bg-teal-700 text-white flex items-center justify-between">
+        <h3 class="text-base font-bold">Imagen del Dashboard Lista</h3>
+        <button type="button" onclick="closeImagePreviewModal()" class="text-white/80 hover:text-white p-1 rounded-lg cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-5 space-y-4 max-h-[80vh] overflow-y-auto text-center">
+        <p class="text-xs text-slate-600">
+          Haz clic en <strong>Descargar PNG</strong> o haz clic derecho sobre la imagen &rarr; <em>Guardar imagen como...</em>
+        </p>
+        <img id="exported-dashboard-img" src="" alt="Dashboard Clima Laboral 2026" class="max-w-full mx-auto rounded-xl border border-slate-200 shadow-sm" />
+        <div class="flex justify-end gap-2.5 pt-2">
+          <a id="download-png-anchor" href="#" download="Dashboard_Clima_Laboral_2026_Grupo_Chavez.png" class="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold transition">
+            Descargar PNG
+          </a>
+          <button type="button" onclick="closeImagePreviewModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs sm:text-sm font-semibold hover:bg-slate-50 cursor-pointer">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Respaldo de Descarga CSV para Iframes Restringidos -->
+  <div id="csv-fallback-modal" class="hidden fixed inset-0 z-50 bg-slate-900/55 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-section">
+      <div class="px-6 py-4 bg-[#0A9CDA] text-white flex items-center justify-between">
+        <h3 class="text-base font-bold">Exportación CSV · Resultados Clima Laboral 2026</h3>
+        <button type="button" onclick="closeCsvFallbackModal()" class="text-white/80 hover:text-white p-1 rounded-lg cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-6 space-y-4">
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Si Google Sites restringe descargas dentro del marco incrustado, copia todo el CSV o ábrelo desde el enlace directo:
+        </p>
+        <textarea id="csv-fallback-textarea" rows="7" readonly class="w-full rounded-xl border border-slate-300 bg-slate-50 p-3 text-xs font-mono text-slate-700 focus:outline-none"></textarea>
+        <div class="flex flex-wrap items-center justify-end gap-2.5">
+          <a id="csv-direct-download-link" href="#" download="Resultados_Clima_Laboral_2026_Grupo_Chavez.csv" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-[#064C69] hover:bg-[#053b52] text-white text-xs sm:text-sm font-bold transition">
+            Abrir / Descargar Archivo
+          </a>
+          <button type="button" onclick="copyCsvToClipboard()" class="px-4 py-2.5 rounded-xl bg-[#0A9CDA] hover:bg-[#0886bd] text-white text-xs sm:text-sm font-bold transition cursor-pointer">
+            Copiar CSV al Portapapeles
+          </button>
+          <button type="button" onclick="closeCsvFallbackModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs sm:text-sm font-semibold hover:bg-slate-50 cursor-pointer">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- SCRIPT PRINCIPAL: SIN CREDENCIALES NI RESPUESTAS EXPUESTAS EN CLIENTE -->
+  <!-- ===================================================================== -->
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNyKGnVl0FjyIyHC2W5bKYjOniU80jSG05DZdTXyCzRiwPRtWqIVFqTnomehhPmS0BBA/exec";
+    const WEBHOOK_STORAGE_KEY = "gc_clima_2026_online_endpoint";
+    const SUBMITTED_LOCK_KEY = "gc_clima_2026_submitted_done";
+
+    // Sesión volátil en memoria RAM únicamente (nunca se persiste la contraseña ni los datos en el HTML)
+    let adminSessionCreds = null;
+    let onlineRecords = [];
+
+    function hasAlreadySubmitted() {
+      try {
+        return Boolean(window.localStorage && window.localStorage.getItem(SUBMITTED_LOCK_KEY) === "1");
+      } catch (_e) {
+        return false;
+      }
+    }
+
+    function markSurveyAsSubmitted() {
+      try {
+        if (window.localStorage) {
+          window.localStorage.setItem(SUBMITTED_LOCK_KEY, "1");
+        }
+      } catch (_e) {}
+    }
+
+    function getActiveEndpointUrl() {
+      if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== "") {
+        return GOOGLE_SCRIPT_URL.trim();
+      }
+      try {
+        return (window.localStorage && window.localStorage.getItem(WEBHOOK_STORAGE_KEY)) || "";
+      } catch (_e) {
+        return "";
+      }
+    }
+
+    function updateOnlineStatusUI() {
+      const endpoint = getActiveEndpointUrl();
+      const pill = document.getElementById("cloud-status-pill");
+      const dot = document.getElementById("cloud-status-dot");
+      const text = document.getElementById("cloud-status-text");
+      const dbBadge = document.getElementById("db-connection-badge");
+
+      if (endpoint) {
+        pill.className = "inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 shadow-2xs";
+        dot.className = "w-2 h-2 rounded-full bg-emerald-500";
+        text.textContent = "En línea · Conectado a la Nube";
+        if (dbBadge) dbBadge.textContent = "Base en línea: Protegida";
+      } else {
+        pill.className = "inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-50 border border-amber-300 text-amber-800 shadow-2xs";
+        dot.className = "w-2 h-2 rounded-full bg-amber-500";
+        text.textContent = "Pendiente URL en línea";
+        if (dbBadge) dbBadge.textContent = "Sin URL de servidor configurada";
+      }
+    }
+
+    // Solo solicita los datos al servidor cuando existe una sesión de administrador autenticada
+    async function fetchOnlineRecords(showNotification = false) {
+      if (!isAdminAuthenticated || !adminSessionCreds) {
+        onlineRecords = [];
+        return false;
+      }
+
+      const endpoint = getActiveEndpointUrl();
+      updateOnlineStatusUI();
+
+      if (!endpoint) {
+        if (showNotification) {
+          showToast(
+            "Falta configurar URL en línea",
+            "Haz clic en 'Configurar Nube' y pega tu URL de Google Apps Script.",
+            "error"
+          );
+        }
+        return false;
+      }
+
+      const syncLabel = document.getElementById("last-sync-label");
+      if (syncLabel) syncLabel.textContent = "Autenticando y sincronizando con la nube...";
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "admin_fetch",
+            email: adminSessionCreds.email,
+            password: adminSessionCreds.password
+          })
+        });
+
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        if (data.status === "unauthorized") {
+          onlineRecords = [];
+          return false;
+        }
+
+        const list = Array.isArray(data.records) ? data.records : [];
+        list.sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+        onlineRecords = list;
+
+        if (syncLabel) {
+          syncLabel.textContent = `Última sincronización: ${new Date().toLocaleTimeString("es-BO")} (${onlineRecords.length} registros)`;
+        }
+        renderAdminDashboard();
+        if (showNotification) {
+          showToast("Nube sincronizada", `Se cargaron ${onlineRecords.length} respuesta(s) de forma segura.`, "success");
+        }
+        return true;
+      } catch (err) {
+        console.error("Error leyendo base en línea:", err);
+        if (syncLabel) syncLabel.textContent = "Error al conectar con Google Sheets";
+        if (showNotification) {
+          showToast(
+            "Error de conexión en línea",
+            "Verifica que la aplicación web de Google Apps Script esté implementada correctamente.",
+            "error"
+          );
+        }
+        return false;
+      }
+    }
+
+    const MATRIX_COLUMNS = ["Siempre", "Casi siempre", "Algunas veces", "Rara vez", "Nunca"];
+    const MATRIX_SCORES = {
+      "Siempre": 5,
+      "Casi siempre": 4,
+      "Algunas veces": 3,
+      "Rara vez": 2,
+      "Nunca": 1
+    };
+
+    const WELLNESS_OPTIONS = [
+      "Capacitaciones de desarrollo profesional",
+      "Capacitaciones de desarrollo personal",
+      "Actividades deportivas",
+      "Actividades recreativas",
+      "Beneficios de convenios con empresas",
+      "Actividades del cuidado de la salud"
+    ];
+
+    // Todas las ramas organizacionales desembocan en la Sección 21 (Pre-sección Demográfica Universal)
+    // y posteriormente pasan a la Sección 19 (Evaluación de Clima Laboral 2026)
+    const SECTIONS = {
+      1: {
+        id: 1,
+        title: "Identificación de Empresa",
+        subtitle: null,
+        questions: [
+          {
+            id: 1,
+            type: "radio",
+            required: true,
+            text: "Empresa a la que perteneces",
+            options: [
+              { label: "Farmacias Chávez", nextSection: 2 },
+              { label: "Quimiza", nextSection: 11 },
+              { label: "Consultorios Médicos Chávez", nextSection: 18 }
+            ]
+          }
+        ]
+      },
+      2: {
+        id: 2,
+        title: "Farmacias Chávez – Área",
+        subtitle: null,
+        questions: [
+          {
+            id: 2,
+            type: "radio",
+            required: true,
+            text: "Farmacias Chávez - Área a la que Perteneces",
+            options: [
+              { label: "Ventas y Operaciones - (Farmacia)", nextSection: 3 },
+              { label: "Logística y Distribución / Compras", nextSection: 4 },
+              { label: "Comercial y Abastecimiento", nextSection: 5 },
+              { label: "Administración y Finanzas", nextSection: 6 },
+              { label: "Auditoría Interna / Control Interno", nextSection: 7 },
+              { label: "Talento Humano", nextSection: 21 },
+              { label: "Tecnología de la Información", nextSection: 21 },
+              { label: "Marketing y Comunicaciones", nextSection: 21 },
+              { label: "Legal", nextSection: 21 },
+              { label: "Experiencia del Cliente e Inteligencia de Negocios", nextSection: 21 }
+            ]
+          }
+        ]
+      },
+      3: {
+        id: 3,
+        title: "Farmacias Chávez – Rol (Ventas y Operaciones)",
+        subtitle: null,
+        nextSection: 8,
+        questions: [
+          {
+            id: 3,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Ventas y Operaciones",
+            options: [
+              { label: "Auxiliar de Farmacia" },
+              { label: "Regente de Farmacia" },
+              { label: "Auxiliar de Almacén y Anfitrión de Sucursal" },
+              { label: "Jefatura y Supervisión Operativa de Sucursales" }
+            ]
+          }
+        ]
+      },
+      4: {
+        id: 4,
+        title: "Farmacias Chávez – Rol (Logística y Distribución / Compras)",
+        subtitle: null,
+        nextSection: 8,
+        questions: [
+          {
+            id: 4,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Logística y Distribución / Compras",
+            options: [
+              { label: "Auxiliar de Logística" },
+              { label: "Responsable / Analista de Compras y Adquisiciones" },
+              { label: "Jefatura, Coordinación y Analistas de Logística y Distribución" },
+              { label: "Auxiliar de Distribución, Reclamos y Montacarga" }
+            ]
+          }
+        ]
+      },
+      5: {
+        id: 5,
+        title: "Farmacias Chávez – Rol (Comercial y Abastecimiento)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 5,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Comercial y Abastecimiento",
+            options: [
+              { label: "Operador de Contact Center" },
+              { label: "Auxiliar / Analista de Reposición" },
+              { label: "Product Manager / Gestión de Categoría, Demanda y Pricing" },
+              { label: "Gerencia / Jefatura / Analista Comercial, Trade y Digital" },
+              { label: "Supervisión y Regencia de Contact Center" },
+              { label: "Analista Junior de Distribución (Contact Center)" }
+            ]
+          }
+        ]
+      },
+      6: {
+        id: 6,
+        title: "Farmacias Chávez – Rol (Administración y Finanzas)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 6,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Administración y Finanzas",
+            options: [
+              { label: "Responsable / Auxiliar de Mantenimiento y Limpieza" },
+              { label: "Gerencia / Jefatura / Responsable Administrativo y Financiero" },
+              { label: "Analista Financiero, Tesorería y Administración" },
+              { label: "Auxiliar Contable, Impositivo, Tesorería y Archivo" }
+            ]
+          }
+        ]
+      },
+      7: {
+        id: 7,
+        title: "Farmacias Chávez – Rol (Auditoría Interna / Control Interno)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 7,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Auditoría Interna / Control Interno",
+            options: [
+              { label: "Responsable / Auxiliar de Monitoreo y Seguridad Física" },
+              { label: "Gerencia / Responsable / Analista de Auditoría, Control Interno y Seg. Información" },
+              { label: "Auxiliar de Inventario / Encargado de Calidad" }
+            ]
+          }
+        ]
+      },
+      8: {
+        id: 8,
+        title: "Farmacias Chávez – Regional",
+        subtitle: null,
+        questions: [
+          {
+            id: 8,
+            type: "radio",
+            required: true,
+            text: "Farmacias Chávez - Regional a la que perteneces",
+            options: [
+              { label: "Oriente", nextSection: 9 },
+              { label: "Occidente", nextSection: 10 }
+            ]
+          }
+        ]
+      },
+      9: {
+        id: 9,
+        title: "Farmacias Chávez – Zona / Departamento (Oriente)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 9,
+            type: "radio",
+            required: true,
+            text: "Selecciona tu Zona o Departamento (Regional Oriente - FC)",
+            options: [
+              { label: "Santa Cruz – Zona 1 (Sup. Marioly Villegas)" },
+              { label: "Santa Cruz – Zona 2 (Sup. David Pérez)" },
+              { label: "Santa Cruz – Zona 3 (Sup. Ma. Esther Arnez)" },
+              { label: "Santa Cruz – Centro de Distribución y Compras" },
+              { label: "Beni y Pando (Trinidad, Riberalta y Cobija)" },
+              { label: "Tarija (Cercado y Yacuiba)" }
+            ]
+          }
+        ]
+      },
+      10: {
+        id: 10,
+        title: "Farmacias Chávez – Zona / Departamento (Occidente)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 10,
+            type: "radio",
+            required: true,
+            text: "Selecciona tu Zona o Departamento (Regional Occidente - FC)",
+            options: [
+              { label: "La Paz – Zona 1 (Sup. Jovana Mamani)" },
+              { label: "La Paz – Zona 2 (Sup. Elva Paxi)" },
+              { label: "La Paz – Centro de Distribución" },
+              { label: "Cochabamba" },
+              { label: "Oruro" }
+            ]
+          }
+        ]
+      },
+      11: {
+        id: 11,
+        title: "Quimiza – Área",
+        subtitle: null,
+        questions: [
+          {
+            id: 11,
+            type: "radio",
+            required: true,
+            text: "Quimiza - Área a la que Perteneces",
+            options: [
+              { label: "Marketing Farma", nextSection: 21 },
+              { label: "Marketing Especializado", nextSection: 21 },
+              { label: "Marketing Consumo", nextSection: 21 },
+              { label: "Staff Comercial", nextSection: 12 },
+              { label: "Ventas FFII", nextSection: 14 },
+              { label: "Visita Médica", nextSection: 20 },
+              { label: "Almacenes y Logística", nextSection: 13 },
+              { label: "Distribución", nextSection: 16 },
+              { label: "Finanzas y Contabilidad", nextSection: 15 },
+              { label: "Marcas Propias", nextSection: 21 },
+              { label: "Instituciones / Ventas Corporativas", nextSection: 21 },
+              { label: "Calidad y Asuntos Regulatorios", nextSection: 21 }
+            ]
+          }
+        ]
+      },
+      12: {
+        id: 12,
+        title: "Quimiza – Rol (Staff Comercial)",
+        subtitle: null,
+        nextSection: 16,
+        questions: [
+          {
+            id: 12,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Staff Comercial",
+            options: [
+              { label: "Gerencia / Jefatura / Supervisión" },
+              { label: "KAM" },
+              { label: "BI Comercial" },
+              { label: "Analista Comercial" },
+              { label: "Analista de Marketing" },
+              { label: "Asesor Médico" }
+            ]
+          }
+        ]
+      },
+      13: {
+        id: 13,
+        title: "Quimiza – Rol (Almacenes y Logística)",
+        subtitle: null,
+        nextSection: 16,
+        questions: [
+          {
+            id: 13,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Almacenes y Logística",
+            options: [
+              { label: "Auxiliar / Encargado / Supervisor de Almacén y Codificado" },
+              { label: "Gerencia / Jefatura / Coordinación de Logística y CD" }
+            ]
+          }
+        ]
+      },
+      14: {
+        id: 14,
+        title: "Quimiza – Rol (Ventas FFII)",
+        subtitle: null,
+        nextSection: 16,
+        questions: [
+          {
+            id: 14,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Ventas FFII",
+            options: [
+              { label: "Vendedor" },
+              { label: "Reponedor" },
+              { label: "Supervisión / Jefatura de Ventas FFII" }
+            ]
+          }
+        ]
+      },
+      20: {
+        id: 20,
+        title: "Quimiza – Rol (Visita Médica)",
+        subtitle: null,
+        nextSection: 16,
+        questions: [
+          {
+            id: 200,
+            displayNum: 15,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Visita Médica",
+            options: [
+              { label: "Visitador Médico / Representante Médico" },
+              { label: "Supervisión de Visita Médica" }
+            ]
+          }
+        ]
+      },
+      15: {
+        id: 15,
+        title: "Quimiza – Rol (Finanzas y Contabilidad)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 15,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Finanzas y Contabilidad",
+            options: [
+              { label: "Jefatura / Encargado / Analista Contable y de Tesorería" },
+              { label: "Auxiliar de Facturación, Cobranzas y Recepción" }
+            ]
+          }
+        ]
+      },
+      16: {
+        id: 16,
+        title: "Quimiza – Regional",
+        subtitle: null,
+        questions: [
+          {
+            id: 16,
+            type: "radio",
+            required: true,
+            text: "Quimiza - Regional a la que perteneces",
+            options: [
+              { label: "Oriente (Santa Cruz)", nextSection: 21 },
+              { label: "Occidente (Cochabamba / La Paz)", nextSection: 17 }
+            ]
+          }
+        ]
+      },
+      17: {
+        id: 17,
+        title: "Quimiza – Departamento (Occidente)",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 17,
+            type: "radio",
+            required: true,
+            text: "Selecciona tu Departamento (Regional Occidente - Quimiza)",
+            options: [
+              { label: "Cochabamba" },
+              { label: "La Paz" }
+            ]
+          }
+        ]
+      },
+      18: {
+        id: 18,
+        title: "Consultorios Médicos Chávez – Área y Rol",
+        subtitle: null,
+        nextSection: 21,
+        questions: [
+          {
+            id: 18,
+            type: "radio",
+            required: true,
+            text: "Consultorios Médicos Chávez - Área a la que Perteneces",
+            options: [{ label: "Médico, Enfermería y Gerencia" }]
+          },
+          {
+            id: 19,
+            type: "radio",
+            required: true,
+            text: "Selecciona el rol que desempeñas en Consultorios Médicos Chávez",
+            options: [
+              { label: "Médico" },
+              { label: "Enfermería y Gerencia" }
+            ]
+          }
+        ]
+      },
+      // NUEVA PRE-SECCIÓN UNIVERSAL (PARA TODAS LAS EMPRESAS ANTES DEL CLIMA GENERAL)
+      21: {
+        id: 21,
+        title: "Perfil Demográfico y Antigüedad",
+        subtitle: "Completa estos tres datos generales (100% anónimos) antes de iniciar las dimensiones de clima laboral.",
+        nextSection: 19,
+        questions: [
+          {
+            id: 101,
+            displayNum: 21,
+            type: "radio",
+            required: true,
+            text: "¿Cuánto tiempo lleva trabajando en la empresa?",
+            options: [
+              { label: "Menos de 3 meses" },
+              { label: "De 3 meses a 1 año" },
+              { label: "De 1 a 3 años" },
+              { label: "Más de 3 años" },
+              { label: "Más de 5 años" }
+            ]
+          },
+          {
+            id: 102,
+            displayNum: 22,
+            type: "radio",
+            required: true,
+            text: "¿Qué rango de edad tienes?",
+            options: [
+              { label: "Entre 19 y 22 años" },
+              { label: "Entre 22 y 25 años" },
+              { label: "Entre 25 y 30 años" },
+              { label: "Entre 31 y 40 años" },
+              { label: "Entre 41 y 49 años" },
+              { label: "Entre 50 años o más" }
+            ]
+          },
+          {
+            id: 103,
+            displayNum: 23,
+            type: "radio",
+            required: true,
+            text: "¿Tienes personal a tu cargo?",
+            options: [
+              { label: "Si" },
+              { label: "No" }
+            ]
+          }
+        ]
+      },
+      19: {
+        id: 19,
+        title: "Evaluación de Clima Laboral 2026",
+        subtitle: "Selecciona la frecuencia que mejor refleje tu experiencia diaria en cada afirmación.",
+        nextSection: null,
+        questions: [
+          {
+            id: 20,
+            displayNum: 24,
+            type: "matrix",
+            required: true,
+            dimensionKey: "compromiso_claridad",
+            text: "Compromiso y Claridad",
+            rows: [
+              { key: "q20_1", label: "El líder comunica con claridad los objetivos y prioridades del área." },
+              { key: "q20_2", label: "En el área existe un ambiente de respeto entre los compañeros." },
+              { key: "q20_3", label: "Recomendaría a otras personas trabajar en esta empresa." }
+            ]
+          },
+          {
+            id: 21,
+            displayNum: 25,
+            type: "matrix",
+            required: true,
+            dimensionKey: "servicio_reconocimiento",
+            text: "Servicio y Reconocimiento",
+            rows: [
+              { key: "q21_1", label: "El líder reconoce y valora los logros y esfuerzos del equipo." },
+              { key: "q21_2", label: "Cuando surgen conflictos entre compañeros, estos se resuelven de manera respetuosa." },
+              { key: "q21_3", label: "Cuando hablo de mi trabajo con familiares o amigos, lo hago con entusiasmo." }
+            ]
+          },
+          {
+            id: 22,
+            displayNum: 26,
+            type: "matrix",
+            required: true,
+            dimensionKey: "sinergia_desarrollo",
+            text: "Sinergia y Desarrollo",
+            rows: [
+              { key: "q22_1", label: "El líder brinda apoyo para el desarrollo profesional y la capacitación del equipo." },
+              { key: "q22_2", label: "El ambiente en el área se caracteriza por la cordialidad y la confianza." },
+              { key: "q22_3", label: "Considero que los valores de la empresa están alineados con los míos" }
+            ]
+          },
+          {
+            id: 23,
+            displayNum: 27,
+            type: "matrix",
+            required: true,
+            dimensionKey: "credibilidad_confianza",
+            text: "Credibilidad y Confianza",
+            rows: [
+              { key: "q23_1", label: "Siento que puedo expresar mis ideas, inquietudes o desacuerdos a mi líder sin temor a represalias." },
+              { key: "q23_2", label: "El líder del área escucha y toma en cuenta las opiniones del equipo." },
+              { key: "q23_3", label: "La empresa transmite confianza y credibilidad a clientes, proveedores y la sociedad en general." }
+            ]
+          },
+          {
+            id: 24,
+            displayNum: 28,
+            type: "matrix",
+            required: true,
+            dimensionKey: "eficiencia_pertenencia",
+            text: "Eficiencia y Pertenencia",
+            rows: [
+              { key: "q24_1", label: "El clima laboral en el área refuerza mi sentido de pertenencia a la organización." },
+              { key: "q24_2", label: "El líder actúa en el marco del respeto, inclusión y colaboración." },
+              { key: "q24_3", label: "Las decisiones del líder contribuyen positivamente al clima laboral del área." },
+              { key: "q24_4", label: "Siento que mis compañeros valoran mis aportes y contribuciones al equipo." }
+            ]
+          },
+          // NUEVA MATRIZ: ALINEACIÓN ESTRATÉGICA (ANTES DE LAS PREGUNTAS FINALES)
+          {
+            id: 29,
+            displayNum: 29,
+            type: "matrix",
+            required: true,
+            dimensionKey: "alineacion_estrategica",
+            text: "Alineación Estratégica",
+            rows: [
+              { key: "q29_1", label: "Siento confianza en la proyección y el futuro del negocio a largo plazo." },
+              { key: "q29_2", label: "Percibo que las metas y el direccionamiento de la Empresa son los adecuados para el momento actual." },
+              { key: "q29_3", label: "La Empresa ejecuta planes claros y bien definidos para alcanzar sus objetivos." },
+              { key: "q29_4", label: "Tengo claro cómo mi trabajo diario contribuye a las metas de mi área y de la Empresa." },
+              { key: "q29_5", label: "La Empresa demuestra orientación al Cliente, comprendiendo y satisfaciendo sus necesidades." }
+            ]
+          },
+          {
+            id: 25,
+            displayNum: 30,
+            type: "select",
+            required: false,
+            text: "Qué actividades de bienestar organizacional valoras más?",
+            placeholder: "Selecciona la respuesta",
+            options: WELLNESS_OPTIONS
+          },
+          {
+            id: 26,
+            displayNum: 31,
+            type: "textarea",
+            required: false,
+            rowsCount: 4,
+            text: "Describe actividades que te gustaría que se implementen y no están expuestas en la lista anterior.",
+            placeholder: "Escriba su respuesta"
+          },
+          {
+            id: 27,
+            displayNum: 32,
+            type: "textarea",
+            required: true,
+            rowsCount: 3,
+            text: "Describe las fortalezas en cuanto a clima laboral, liderazgo y comunicación en tu equipo.",
+            placeholder: "Escriba su respuesta"
+          },
+          {
+            id: 28,
+            displayNum: 33,
+            type: "textarea",
+            required: true,
+            rowsCount: 3,
+            text: "Describe oportunidades de mejora en cuanto a clima laboral, liderazgo y comunicación en tu equipo.",
+            placeholder: "Escriba su respuesta"
+          },
+          // NUEVA PREGUNTA FINAL: NET PROMOTER SCORE (eNPS 1 AL 10)
+          {
+            id: 30,
+            displayNum: 34,
+            type: "nps",
+            required: true,
+            text: "En una escala del 1 al 10, ¿qué tan probable es que recomiendes a esta empresa como un buen lugar para trabajar?",
+            description: "El Net Promoter Score (eNPS) mide tu nivel de lealtad y satisfacción laboral: del 1 al 6 indica que existen aspectos críticos por mejorar (Detractores), del 7 al 8 refleja una experiencia conforme pero neutral (Pasivos), y del 9 al 10 representa un alto compromiso y orgullo de pertenecer a la organización (Promotores)."
+          }
+        ]
+      }
+    };
+
+    let currentSectionId = 1;
+    let historyStack = [];
+    let answers = {};
+    let isSubmitting = false;
+    let isAdminAuthenticated = false;
+    let chartInstances = {};
+
+    const COMPANY_THEMES = {
+      default: { label: "Grupo Chávez · Encuesta 2026", primary: "#0A9CDA", dark: "#064C69", light: "#EBF6FB", border: "#B8DFEE" },
+      "Farmacias Chávez": { label: "Farmacias Chávez", primary: "#0A9CDA", dark: "#064C69", light: "#EBF6FB", border: "#B8DFEE" },
+      "Quimiza": { label: "Quimiza", primary: "#EF4A1E", dark: "#B83410", light: "#FFF3EF", border: "#FED7CC" },
+      "Consultorios Médicos Chávez": { label: "Consultorios Médicos Chávez", primary: "#064C69", dark: "#0A9CDA", light: "#EDF7FB", border: "#B8DFEE" }
+    };
+
+    function applyCompanyTheme(company) {
+      const theme = COMPANY_THEMES[company] || COMPANY_THEMES.default;
+      const root = document.documentElement;
+      root.style.setProperty("--brand-primary", theme.primary);
+      root.style.setProperty("--brand-dark", theme.dark);
+      root.style.setProperty("--brand-light", theme.light);
+      root.style.setProperty("--brand-border", theme.border);
+      const pillLabel = document.getElementById("active-company-label");
+      if (pillLabel) pillLabel.textContent = theme.label;
+    }
+
+    function getNextSectionId(sectionId) {
+      const section = SECTIONS[sectionId];
+      if (!section) return null;
+      for (const q of section.questions) {
+        if (q.type === "radio" && q.options) {
+          const selected = answers[q.id];
+          const opt = q.options.find(o => o.label === selected);
+          if (opt && opt.nextSection !== undefined) return opt.nextSection;
+        }
+      }
+      return section.nextSection !== undefined ? section.nextSection : null;
+    }
+
+    function sanitizeAnswersForPath(visitedSections) {
+      const validKeys = new Set();
+      visitedSections.forEach(secId => {
+        const sec = SECTIONS[secId];
+        if (!sec) return;
+        sec.questions.forEach(q => {
+          if (q.type === "matrix") {
+            q.rows.forEach(r => validKeys.add(r.key));
+          } else {
+            validKeys.add(String(q.id));
+          }
+        });
+      });
+      Object.keys(answers).forEach(k => {
+        if (!validKeys.has(k)) delete answers[k];
+      });
+    }
+
+    function calculateProgress() {
+      if (currentSectionId === 1) return { label: "Paso 1 · Identificación de Empresa", pct: 12 };
+      if (currentSectionId === 2 || currentSectionId === 11) return { label: "Paso 2 · Selección de Área", pct: 28 };
+      if ([3, 4, 5, 6, 7, 12, 13, 14, 15, 18, 20].includes(currentSectionId)) return { label: "Paso 3 · Rol / Equipo de Trabajo", pct: 44 };
+      if ([8, 9, 10, 16, 17].includes(currentSectionId)) return { label: "Paso 4 · Regional y Zona", pct: 58 };
+      if (currentSectionId === 21) return { label: "Paso 5 · Perfil Demográfico y Antigüedad", pct: 72 };
+      if (currentSectionId === 19) {
+        const { answered, total } = countSection19Required();
+        const pct = Math.min(99, 76 + Math.round((answered / total) * 23));
+        return { label: "Paso Final · Cuestionario de Clima Laboral", pct };
+      }
+      return { label: "En progreso", pct: 50 };
+    }
+
+    function countSection19Required() {
+      let total = 0;
+      let answered = 0;
+      SECTIONS[19].questions.forEach(q => {
+        if (q.type === "matrix" && q.required) {
+          q.rows.forEach(r => {
+            total++;
+            if (answers[r.key]) answered++;
+          });
+        } else if (q.required) {
+          total++;
+          if (answers[q.id] !== undefined && answers[q.id] !== null && String(answers[q.id]).trim() !== "") answered++;
+        }
+      });
+      return { answered, total };
+    }
+
+    function renderSection() {
+      hideToast();
+      const section = SECTIONS[currentSectionId];
+      if (!section) return;
+
+      applyCompanyTheme(answers[1]);
+      const displayStep = currentSectionId === 1 ? "PASO 1 · EMPRESA"
+        : (currentSectionId === 2 || currentSectionId === 11) ? "PASO 2 · ÁREA"
+        : [3, 4, 5, 6, 7, 12, 13, 14, 15, 18, 20].includes(currentSectionId) ? "PASO 3 · ROL / EQUIPO"
+        : [8, 9, 10, 16, 17].includes(currentSectionId) ? "PASO 4 · REGIONAL Y ZONA"
+        : currentSectionId === 21 ? "PASO 5 · DATOS GENERALES (TODOS)"
+        : "PASO FINAL · EVALUACIÓN DE CLIMA";
+      document.getElementById("section-badge").textContent = displayStep;
+      document.getElementById("section-title").textContent = section.title;
+
+      const subBox = document.getElementById("section-subtitle-box");
+      const subText = document.getElementById("section-subtitle-text");
+      if (section.subtitle) {
+        subText.textContent = section.subtitle;
+        subBox.classList.remove("hidden");
+      } else {
+        subBox.classList.add("hidden");
+      }
+
+      const noteBox = document.getElementById("initial-note-box");
+      if (currentSectionId === 1) noteBox.classList.remove("hidden");
+      else noteBox.classList.add("hidden");
+
+      const counterPill = document.getElementById("section-counter-pill");
+      if (currentSectionId === 19) {
+        counterPill.classList.remove("hidden");
+        updateSection19Counter();
+      } else {
+        counterPill.classList.add("hidden");
+      }
+
+      updateProgressBar();
+
+      const container = document.getElementById("questions-container");
+      container.innerHTML = "";
+
+      section.questions.forEach(q => {
+        const card = document.createElement("div");
+        card.id = `question-card-${q.id}`;
+        card.className = "bg-white rounded-2xl shadow-xs border border-slate-200/90 p-5 sm:p-7 transition-all duration-200 animate-section";
+
+        const isClimateQuestion = currentSectionId === 19;
+        const titleColorClass = isClimateQuestion ? "text-[#D95D1E]" : "text-slate-900";
+        const asteriskHtml = q.required ? `<span class="text-red-600 font-bold ml-1" title="Obligatoria">*</span>` : "";
+        let bodyHtml = "";
+
+        if (q.type === "radio") {
+          bodyHtml = `<div class="mt-4 space-y-2.5">`;
+          q.options.forEach((opt, idx) => {
+            const isSelected = answers[q.id] === opt.label;
+            const inputId = `q_${q.id}_opt_${idx}`;
+            bodyHtml += `
+              <label for="${inputId}" class="option-card flex items-center gap-3.5 p-3.5 rounded-xl border cursor-pointer select-none ${isSelected ? "selected" : "border-slate-200 bg-white"}">
+                <input type="radio" id="${inputId}" name="question_${q.id}" value="${escapeHtml(opt.label)}" ${isSelected ? "checked" : ""} onchange="handleRadioSelect(${q.id}, ${idx})" class="w-4 h-4 shrink-0 cursor-pointer" style="accent-color: var(--brand-primary);" />
+                <span class="text-sm sm:text-[15px] font-medium text-slate-800 leading-snug">${escapeHtml(opt.label)}</span>
+              </label>
+            `;
+          });
+          bodyHtml += `</div>`;
+        } else if (q.type === "matrix") {
+          let desktopRowsHtml = "";
+          q.rows.forEach((row, rIdx) => {
+            const rowBg = rIdx % 2 === 0 ? "bg-[#F3F4F6]" : "bg-white";
+            const selectedVal = answers[row.key] || "";
+            let cellsHtml = "";
+            MATRIX_COLUMNS.forEach((colLabel, cIdx) => {
+              const radioId = `${row.key}_desk_${cIdx}`;
+              const checkedAttr = selectedVal === colLabel ? "checked" : "";
+              cellsHtml += `
+                <td class="py-3.5 px-2 text-center align-middle">
+                  <label for="${radioId}" class="w-full h-full flex items-center justify-center py-1 cursor-pointer" title="${escapeHtml(colLabel)}">
+                    <input type="radio" id="${radioId}" name="${row.key}_desktop" value="${escapeHtml(colLabel)}" ${checkedAttr} onchange="handleMatrixSelect('${row.key}', '${escapeHtml(colLabel)}', ${q.id})" class="matrix-radio" />
+                  </label>
+                </td>
+              `;
+            });
+            desktopRowsHtml += `
+              <tr id="matrix-row-desk-${row.key}" class="${rowBg} transition-colors">
+                <td class="py-3.5 px-4 text-[13.5px] sm:text-sm text-slate-800 leading-snug font-normal w-[38%]">${escapeHtml(row.label)}</td>
+                ${cellsHtml}
+              </tr>
+            `;
+          });
+
+          let mobileRowsHtml = "";
+          q.rows.forEach((row, rIdx) => {
+            const rowBg = rIdx % 2 === 0 ? "bg-[#F3F4F6]" : "bg-white border border-slate-200";
+            const selectedVal = answers[row.key] || "";
+            let pillsHtml = "";
+            MATRIX_COLUMNS.forEach((colLabel, cIdx) => {
+              const radioId = `${row.key}_mob_${cIdx}`;
+              const isChecked = selectedVal === colLabel;
+              pillsHtml += `
+                <label for="${radioId}" class="flex items-center justify-between px-3 py-2.5 rounded-lg border text-xs font-medium cursor-pointer transition ${isChecked ? "bg-[#FFF4EE] border-[#D95D1E] text-[#B8430E] font-semibold" : "bg-white border-slate-200 text-slate-700"}">
+                  <span>${escapeHtml(colLabel)}</span>
+                  <input type="radio" id="${radioId}" name="${row.key}_mobile" value="${escapeHtml(colLabel)}" ${isChecked ? "checked" : ""} onchange="handleMatrixSelect('${row.key}', '${escapeHtml(colLabel)}', ${q.id})" class="matrix-radio" />
+                </label>
+              `;
+            });
+            mobileRowsHtml += `
+              <div id="matrix-row-mob-${row.key}" class="${rowBg} rounded-xl p-3.5 space-y-2.5">
+                <p class="text-sm font-medium text-slate-800 leading-snug">${escapeHtml(row.label)}</p>
+                <div class="grid grid-cols-1 gap-1.5">${pillsHtml}</div>
+              </div>
+            `;
+          });
+
+          bodyHtml = `
+            <div class="hidden md:block mt-5 overflow-hidden rounded-xl border border-slate-200/80">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-white border-b border-slate-200">
+                    <th class="py-3 px-4 text-left text-xs font-semibold text-slate-400 w-[38%]"></th>
+                    ${MATRIX_COLUMNS.map(col => `<th class="py-3 px-2 text-center text-xs font-semibold text-slate-700 w-[12.4%]">${escapeHtml(col)}</th>`).join("")}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200/60">${desktopRowsHtml}</tbody>
+              </table>
+            </div>
+            <div class="md:hidden mt-4 space-y-3">${mobileRowsHtml}</div>
+          `;
+        } else if (q.type === "select") {
+          const currentVal = answers[q.id] || "";
+          bodyHtml = `
+            <div class="mt-4 max-w-lg">
+              <div class="relative">
+                <select id="select_${q.id}" onchange="handleSelectChange(${q.id}, this.value)" class="w-full appearance-none rounded-xl border border-slate-300 bg-white px-4 py-3 pr-10 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#D95D1E] focus:border-[#D95D1E] cursor-pointer">
+                  <option value="" ${currentVal === "" ? "selected" : ""}>${escapeHtml(q.placeholder || "Selecciona la respuesta")}</option>
+                  ${q.options.map(opt => `<option value="${escapeHtml(opt)}" ${currentVal === opt ? "selected" : ""}>${escapeHtml(opt)}</option>`).join("")}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-500">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (q.type === "textarea") {
+          const currentVal = answers[q.id] || "";
+          bodyHtml = `
+            <div class="mt-4">
+              <textarea id="textarea_${q.id}" rows="${q.rowsCount || 3}" placeholder="${escapeHtml(q.placeholder || "Escriba su respuesta")}" oninput="handleTextInput(${q.id}, this.value)" class="w-full rounded-xl border border-slate-300 bg-slate-50/50 focus:bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D95D1E] focus:border-[#D95D1E] transition">${escapeHtml(currentVal)}</textarea>
+            </div>
+          `;
+        } else if (q.type === "nps") {
+          const selectedScore = Number(answers[q.id] || 0);
+          let npsButtonsHtml = "";
+          for (let score = 1; score <= 10; score++) {
+            const isSelected = selectedScore === score;
+            let activeColor = "bg-[#D95D1E] text-white border-[#D95D1E] ring-2 ring-[#D95D1E]/30 shadow-md";
+            if (isSelected) {
+              if (score <= 6) activeColor = "bg-red-600 text-white border-red-600 ring-2 ring-red-200 shadow-md";
+              else if (score <= 8) activeColor = "bg-amber-500 text-white border-amber-500 ring-2 ring-amber-200 shadow-md";
+              else activeColor = "bg-emerald-600 text-white border-emerald-600 ring-2 ring-emerald-200 shadow-md";
+            }
+            const btnClass = isSelected
+              ? activeColor
+              : "bg-white hover:bg-slate-50 text-slate-800 border-slate-300 hover:border-[#D95D1E]";
+
+            npsButtonsHtml += `
+              <button
+                type="button"
+                onclick="handleNpsSelect(${q.id}, ${score})"
+                class="nps-btn h-11 sm:h-12 rounded-xl border font-extrabold text-sm sm:text-base flex items-center justify-center cursor-pointer ${btnClass}"
+              >
+                ${score}
+              </button>
+            `;
+          }
+
+          bodyHtml = `
+            <div class="mt-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+              <span class="font-bold text-slate-800 block mb-1">¿Qué es el Net Promoter Score (eNPS)?</span>
+              ${escapeHtml(q.description)}
+              <div class="mt-2.5 flex flex-wrap gap-2 text-[11px] font-bold">
+                <span class="px-2 py-0.5 rounded-md bg-red-50 text-red-700 border border-red-200">1 – 6: Detractor</span>
+                <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200">7 – 8: Pasivo</span>
+                <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">9 – 10: Promotor</span>
+              </div>
+            </div>
+            <div class="mt-5">
+              <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                ${npsButtonsHtml}
+              </div>
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 mt-2 px-0.5">
+                <span>1 · Nada probable</span>
+                <span>10 · Totalmente probable</span>
+              </div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div>
+            <p class="text-base sm:text-[17px] font-bold ${titleColorClass} leading-snug">${q.displayNum || q.id}. ${escapeHtml(q.text)}${asteriskHtml}</p>
+            ${bodyHtml}
+            <p id="error-msg-${q.id}" class="hidden mt-3 text-xs font-semibold text-red-600 flex items-center gap-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span id="error-text-${q.id}">Esta pregunta es obligatoria.</span>
+            </p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      const btnPrev = document.getElementById("btn-prev");
+      if (historyStack.length > 0) btnPrev.classList.remove("hidden");
+      else btnPrev.classList.add("hidden");
+
+      const btnNextLabel = document.getElementById("btn-next-label");
+      const btnNextIcon = document.getElementById("btn-next-icon");
+      const btnNext = document.getElementById("btn-next");
+      if (currentSectionId === 19) {
+        btnNextLabel.textContent = "Enviar Encuesta";
+        btnNextIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />`;
+        btnNext.style.backgroundColor = "#D95D1E";
+      } else {
+        btnNextLabel.textContent = "Siguiente";
+        btnNextIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />`;
+        btnNext.style.backgroundColor = "var(--brand-primary)";
+      }
+    }
+
+    function handleRadioSelect(questionId, optionIdx) {
+      const section = SECTIONS[currentSectionId];
+      const question = section.questions.find(q => q.id === questionId);
+      if (!question) return;
+      const opt = question.options[optionIdx];
+      answers[questionId] = opt.label;
+      if (questionId === 1) applyCompanyTheme(opt.label);
+      clearQuestionError(questionId);
+      renderSection();
+    }
+
+    function handleNpsSelect(questionId, score) {
+      answers[questionId] = score;
+      clearQuestionError(questionId);
+      renderSection();
+    }
+
+    function handleMatrixSelect(rowKey, value, questionId) {
+      answers[rowKey] = value;
+      const deskRow = document.getElementById(`matrix-row-desk-${rowKey}`);
+      const mobRow = document.getElementById(`matrix-row-mob-${rowKey}`);
+      if (deskRow) {
+        deskRow.classList.remove("bg-red-50", "ring-1", "ring-red-400");
+        deskRow.querySelectorAll('input[type="radio"]').forEach(inp => { inp.checked = inp.value === value; });
+      }
+      if (mobRow) {
+        mobRow.classList.remove("ring-2", "ring-red-400");
+        mobRow.querySelectorAll("label").forEach(lbl => {
+          const inp = lbl.querySelector("input");
+          if (inp && inp.value === value) {
+            inp.checked = true;
+            lbl.className = "flex items-center justify-between px-3 py-2.5 rounded-lg border text-xs cursor-pointer transition bg-[#FFF4EE] border-[#D95D1E] text-[#B8430E] font-semibold";
+          } else if (inp) {
+            inp.checked = false;
+            lbl.className = "flex items-center justify-between px-3 py-2.5 rounded-lg border text-xs font-medium cursor-pointer transition bg-white border-slate-200 text-slate-700";
+          }
+        });
+      }
+      const qObj = SECTIONS[19].questions.find(q => q.id === questionId);
+      if (qObj && qObj.rows.every(r => Boolean(answers[r.key]))) clearQuestionError(questionId);
+      updateSection19Counter();
+      updateProgressBar();
+    }
+
+    function handleSelectChange(questionId, value) { answers[questionId] = value; }
+    function handleTextInput(questionId, value) {
+      answers[questionId] = value;
+      if (value && value.trim() !== "") clearQuestionError(questionId);
+      updateSection19Counter();
+      updateProgressBar();
+    }
+
+    function updateSection19Counter() {
+      const pill = document.getElementById("section-counter-pill");
+      if (!pill) return;
+      const { answered, total } = countSection19Required();
+      pill.textContent = `${answered} / ${total} obligatorias`;
+    }
+
+    function updateProgressBar() {
+      const prog = calculateProgress();
+      document.getElementById("progress-step-label").textContent = prog.label;
+      document.getElementById("progress-percent-label").textContent = `${prog.pct}%`;
+      document.getElementById("progress-bar-fill").style.width = `${prog.pct}%`;
+    }
+
+    function validateCurrentSection() {
+      const section = SECTIONS[currentSectionId];
+      let firstInvalidElement = null;
+      let missingMatrixRows = 0;
+
+      section.questions.forEach(q => {
+        if (q.type === "matrix" && q.required) {
+          let hasMissingRow = false;
+          q.rows.forEach(row => {
+            const deskRow = document.getElementById(`matrix-row-desk-${row.key}`);
+            const mobRow = document.getElementById(`matrix-row-mob-${row.key}`);
+            if (!answers[row.key]) {
+              hasMissingRow = true;
+              missingMatrixRows++;
+              if (deskRow) deskRow.classList.add("bg-red-50", "ring-1", "ring-red-400");
+              if (mobRow) mobRow.classList.add("ring-2", "ring-red-400");
+              if (!firstInvalidElement) {
+                firstInvalidElement = deskRow && deskRow.offsetParent !== null ? deskRow : (mobRow || document.getElementById(`question-card-${q.id}`));
+              }
+            } else {
+              if (deskRow) deskRow.classList.remove("bg-red-50", "ring-1", "ring-red-400");
+              if (mobRow) mobRow.classList.remove("ring-2", "ring-red-400");
+            }
+          });
+          if (hasMissingRow) markQuestionError(q.id, "Por favor responde todas las filas resaltadas en rojo.");
+          else clearQuestionError(q.id);
+        } else if (q.required) {
+          const val = answers[q.id];
+          const isEmpty = val === undefined || val === null || String(val).trim() === "";
+          if (isEmpty) {
+            markQuestionError(q.id, "Esta pregunta es obligatoria.");
+            if (!firstInvalidElement) firstInvalidElement = document.getElementById(`question-card-${q.id}`);
+          } else {
+            clearQuestionError(q.id);
+          }
+        }
+      });
+
+      if (firstInvalidElement) {
+        const msg = missingMatrixRows > 0
+          ? `Faltan ${missingMatrixRows} fila(s) por responder en las matrices o preguntas obligatorias (*).`
+          : "Por favor completa todas las preguntas obligatorias marcadas con (*) antes de continuar.";
+        showToast("Campos obligatorios pendientes", msg, "error");
+        firstInvalidElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        return false;
+      }
+      return true;
+    }
+
+    function markQuestionError(qId, text) {
+      const card = document.getElementById(`question-card-${qId}`);
+      const err = document.getElementById(`error-msg-${qId}`);
+      const errText = document.getElementById(`error-text-${qId}`);
+      if (card) card.classList.add("border-red-400", "ring-2", "ring-red-100");
+      if (errText && text) errText.textContent = text;
+      if (err) err.classList.remove("hidden");
+    }
+
+    function clearQuestionError(qId) {
+      const card = document.getElementById(`question-card-${qId}`);
+      const err = document.getElementById(`error-msg-${qId}`);
+      if (card) card.classList.remove("border-red-400", "ring-2", "ring-red-100");
+      if (err) err.classList.add("hidden");
+    }
+
+    function goNext() {
+      if (!validateCurrentSection()) return;
+      if (currentSectionId === 19) {
+        submitSurveyOnline();
+        return;
+      }
+      const nextSec = getNextSectionId(currentSectionId);
+      if (nextSec !== null && SECTIONS[nextSec]) {
+        historyStack.push(currentSectionId);
+        currentSectionId = nextSec;
+        sanitizeAnswersForPath([...historyStack, currentSectionId]);
+        renderSection();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function goBack() {
+      if (historyStack.length === 0) return;
+      currentSectionId = historyStack.pop();
+      renderSection();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function classifyNpsScore(score) {
+      const num = Number(score || 0);
+      if (num >= 9) return "Promotor";
+      if (num >= 7) return "Pasivo";
+      if (num >= 1) return "Detractor";
+      return "";
+    }
+
+    function buildHomologatedPayload() {
+      const empresa = answers[1] || "";
+      let area = "";
+      let rol = "";
+      let regional = "No aplica (Oficina / Transversal)";
+      let zona = "No aplica (Oficina / Transversal)";
+
+      if (empresa === "Farmacias Chávez") {
+        area = answers[2] || "";
+        if (area === "Ventas y Operaciones - (Farmacia)") {
+          rol = answers[3] || "";
+          regional = answers[8] || "";
+          zona = regional === "Oriente" ? (answers[9] || "") : (answers[10] || "");
+        } else if (area === "Logística y Distribución / Compras") {
+          rol = answers[4] || "";
+          regional = answers[8] || "";
+          zona = regional === "Oriente" ? (answers[9] || "") : (answers[10] || "");
+        } else if (area === "Comercial y Abastecimiento") {
+          rol = answers[5] || "";
+        } else if (area === "Administración y Finanzas") {
+          rol = answers[6] || "";
+        } else if (area === "Auditoría Interna / Control Interno") {
+          rol = answers[7] || "";
+        } else if (area === "Talento Humano") {
+          rol = "Talento Humano";
+        } else if (area === "Tecnología de la Información") {
+          rol = "Tecnología de la Información";
+        } else if (area === "Marketing y Comunicaciones") {
+          rol = "Equipo de Marketing y Comunicaciones";
+        } else if (area === "Legal") {
+          rol = "Equipo de Legal";
+        } else if (area === "Experiencia del Cliente e Inteligencia de Negocios") {
+          rol = "Equipo de Experiencia del Cliente e Inteligencia de Negocios";
+        }
+      } else if (empresa === "Quimiza") {
+        area = answers[11] || "";
+        if (area === "Marketing Farma") {
+          rol = "Equipo de Marketing Farma";
+        } else if (area === "Marketing Especializado") {
+          rol = "Equipo de Marketing Especializado";
+        } else if (area === "Marketing Consumo") {
+          rol = "Equipo de Marketing Consumo";
+        } else if (area === "Staff Comercial") {
+          rol = answers[12] || "";
+          regional = answers[16] || "";
+          zona = regional === "Oriente (Santa Cruz)" ? "Santa Cruz" : (answers[17] || "");
+        } else if (area === "Ventas FFII") {
+          rol = answers[14] || "";
+          regional = answers[16] || "";
+          zona = regional === "Oriente (Santa Cruz)" ? "Santa Cruz" : (answers[17] || "");
+        } else if (area === "Visita Médica") {
+          rol = answers[200] || "";
+          regional = answers[16] || "";
+          zona = regional === "Oriente (Santa Cruz)" ? "Santa Cruz" : (answers[17] || "");
+        } else if (area === "Almacenes y Logística") {
+          rol = answers[13] || "";
+          regional = answers[16] || "";
+          zona = regional === "Oriente (Santa Cruz)" ? "Santa Cruz" : (answers[17] || "");
+        } else if (area === "Distribución") {
+          rol = "Auxiliar / Encargado de Distribución";
+          regional = answers[16] || "";
+          zona = regional === "Oriente (Santa Cruz)" ? "Santa Cruz" : (answers[17] || "");
+        } else if (area === "Finanzas y Contabilidad") {
+          rol = answers[15] || "";
+        } else if (area === "Marcas Propias") {
+          rol = "Equipo de Marcas Propias";
+        } else if (area === "Instituciones / Ventas Corporativas") {
+          rol = "Equipo de Instituciones y Ventas Corporativas";
+        } else if (area === "Calidad y Asuntos Regulatorios") {
+          rol = "Equipo de Calidad y Asuntos Regulatorios";
+        }
+      } else if (empresa === "Consultorios Médicos Chávez") {
+        area = answers[18] || "Médico, Enfermería y Gerencia";
+        rol = answers[19] || "";
+      }
+
+      const antiguedad = answers[101] || "";
+      const rangoEdad = answers[102] || "";
+      const personalCargo = answers[103] || "";
+
+      const calcDimAvg = (keys) => {
+        let sum = 0, cnt = 0;
+        keys.forEach(k => {
+          const val = MATRIX_SCORES[answers[k]];
+          if (val) { sum += val; cnt++; }
+        });
+        return cnt > 0 ? Number((sum / cnt).toFixed(2)) : 0;
+      };
+
+      const promCompromiso = calcDimAvg(["q20_1", "q20_2", "q20_3"]);
+      const promServicio = calcDimAvg(["q21_1", "q21_2", "q21_3"]);
+      const promSinergia = calcDimAvg(["q22_1", "q22_2", "q22_3"]);
+      const promCredibilidad = calcDimAvg(["q23_1", "q23_2", "q23_3"]);
+      const promEficiencia = calcDimAvg(["q24_1", "q24_2", "q24_3", "q24_4"]);
+      const promAlineacion = calcDimAvg(["q29_1", "q29_2", "q29_3", "q29_4", "q29_5"]);
+
+      const allKeys = [
+        "q20_1", "q20_2", "q20_3",
+        "q21_1", "q21_2", "q21_3",
+        "q22_1", "q22_2", "q22_3",
+        "q23_1", "q23_2", "q23_3",
+        "q24_1", "q24_2", "q24_3", "q24_4",
+        "q29_1", "q29_2", "q29_3", "q29_4", "q29_5"
+      ];
+      const promedioGeneral = calcDimAvg(allKeys);
+
+      const matrixTexts = {};
+      const matrixNums = {};
+      allKeys.forEach(k => {
+        matrixTexts[k] = answers[k] || "";
+        matrixNums[k] = MATRIX_SCORES[answers[k]] || 0;
+      });
+
+      const npsScore = Number(answers[30] || 0);
+      const npsCategory = classifyNpsScore(npsScore);
+
+      const now = new Date();
+      return {
+        localId: `RESP-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        createdAtMs: now.getTime(),
+        fechaHora: now.toLocaleString("es-BO"),
+        empresa,
+        area,
+        rol,
+        regional,
+        zona,
+        antiguedad,
+        rangoEdad,
+        personalCargo,
+        matrixTexts,
+        matrixNums,
+        promCompromiso,
+        promServicio,
+        promSinergia,
+        promCredibilidad,
+        promEficiencia,
+        promAlineacion,
+        promedioGeneral,
+        p25Bienestar: answers[25] || "",
+        p26Sugerencias: (answers[26] || "").trim(),
+        p27Fortalezas: (answers[27] || "").trim(),
+        p28Mejoras: (answers[28] || "").trim(),
+        npsScore,
+        npsCategory
+      };
+    }
+
+    async function submitSurveyOnline() {
+      if (isSubmitting) return;
+
+      const endpoint = getActiveEndpointUrl();
+      if (!endpoint) {
+        showToast(
+          "Servidor en línea no configurado",
+          "Para guardar respuestas en línea, ingresa como Admin ('Acceso Admin' -> 'Configurar Nube') y pega tu URL de Google Apps Script.",
+          "error"
+        );
+        return;
+      }
+
+      isSubmitting = true;
+      const btnNext = document.getElementById("btn-next");
+      const btnNextLabel = document.getElementById("btn-next-label");
+      btnNext.disabled = true;
+      btnNextLabel.textContent = "Guardando en línea...";
+
+      const payload = buildHomologatedPayload();
+
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        markSurveyAsSubmitted();
+
+        document.getElementById("survey-view").classList.add("hidden");
+        document.getElementById("thankyou-view").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (error) {
+        console.error("Error enviando respuesta en línea:", error);
+        showToast(
+          "Error de red al enviar",
+          "No se pudo conectar con el servidor en línea. Verifica tu conexión a internet e intenta nuevamente.",
+          "error"
+        );
+      } finally {
+        isSubmitting = false;
+        btnNext.disabled = false;
+        btnNextLabel.textContent = "Enviar Encuesta";
+      }
+    }
+
+    function startNewResponse() {
+      answers = {};
+      historyStack = [];
+      currentSectionId = 1;
+      applyCompanyTheme("default");
+
+      document.getElementById("thankyou-view").classList.add("hidden");
+      document.getElementById("survey-view").classList.remove("hidden");
+      renderSection();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openAdminModal() {
+      if (isAdminAuthenticated && adminSessionCreds) {
+        showAdminView();
+        return;
+      }
+      document.getElementById("admin-login-error").classList.add("hidden");
+      document.getElementById("admin-email-input").value = "";
+      document.getElementById("admin-pass-input").value = "";
+      document.getElementById("admin-login-modal").classList.remove("hidden");
+      setTimeout(() => document.getElementById("admin-email-input").focus(), 60);
+    }
+
+    function closeAdminModal() {
+      document.getElementById("admin-login-modal").classList.add("hidden");
+    }
+
+    // Autenticación 100% delegada al servidor Google Apps Script (sin contraseñas en el HTML)
+    async function handleAdminLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById("admin-email-input").value.trim().toLowerCase();
+      const pass = document.getElementById("admin-pass-input").value;
+      const errBox = document.getElementById("admin-login-error");
+      const submitBtn = document.getElementById("btn-admin-submit");
+
+      const endpoint = getActiveEndpointUrl();
+      if (!endpoint) {
+        errBox.textContent = "No hay servidor configurado para validar credenciales.";
+        errBox.classList.remove("hidden");
+        return;
+      }
+
+      errBox.classList.add("hidden");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Verificando...";
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "admin_fetch",
+            email: email,
+            password: pass
+          })
+        });
+
+        const data = await res.json();
+        if (data.status !== "ok") {
+          errBox.textContent = "Usuario o contraseña incorrectos.";
+          errBox.classList.remove("hidden");
+          return;
+        }
+
+        // Guardamos credenciales solo en memoria mientras dure la sesión activa
+        adminSessionCreds = { email, password: pass };
+        isAdminAuthenticated = true;
+
+        const list = Array.isArray(data.records) ? data.records : [];
+        list.sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+        onlineRecords = list;
+
+        closeAdminModal();
+        showAdminView(true);
+      } catch (err) {
+        console.error("Error de autenticación:", err);
+        errBox.textContent = "No se pudo validar contra el servidor. Revisa tu conexión o actualiza el Apps Script.";
+        errBox.classList.remove("hidden");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Validar e Ingresar";
+      }
+    }
+
+    function showAdminView(alreadyFetched = false) {
+      document.getElementById("survey-view").classList.add("hidden");
+      document.getElementById("thankyou-view").classList.add("hidden");
+      document.getElementById("admin-view").classList.remove("hidden");
+      document.getElementById("admin-btn-text").textContent = "Panel Admin (Activo)";
+
+      const mainContainer = document.getElementById("main-container");
+      mainContainer.classList.remove("max-w-3xl");
+      mainContainer.classList.add("max-w-5xl");
+
+      const syncLabel = document.getElementById("last-sync-label");
+      if (syncLabel && alreadyFetched) {
+        syncLabel.textContent = `Última sincronización: ${new Date().toLocaleTimeString("es-BO")} (${onlineRecords.length} registros)`;
+      }
+
+      renderAdminDashboard();
+      if (!alreadyFetched) {
+        fetchOnlineRecords(false);
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function logoutAdmin() {
+      // Al salir se purgan credenciales y datos de la memoria del navegador
+      isAdminAuthenticated = false;
+      adminSessionCreds = null;
+      onlineRecords = [];
+
+      document.getElementById("admin-view").classList.add("hidden");
+      document.getElementById("admin-btn-text").textContent = "Acceso Admin";
+
+      const mainContainer = document.getElementById("main-container");
+      mainContainer.classList.remove("max-w-5xl");
+      mainContainer.classList.add("max-w-3xl");
+
+      if (hasAlreadySubmitted()) {
+        document.getElementById("survey-view").classList.add("hidden");
+        document.getElementById("thankyou-view").classList.remove("hidden");
+      } else {
+        startNewResponse();
+      }
+    }
+
+    const CATALOG_AREAS_BY_COMPANY = {
+      "Farmacias Chávez": [
+        "Ventas y Operaciones - (Farmacia)",
+        "Logística y Distribución / Compras",
+        "Comercial y Abastecimiento",
+        "Administración y Finanzas",
+        "Auditoría Interna / Control Interno",
+        "Talento Humano",
+        "Tecnología de la Información",
+        "Marketing y Comunicaciones",
+        "Legal",
+        "Experiencia del Cliente e Inteligencia de Negocios"
+      ],
+      "Quimiza": [
+        "Marketing Farma",
+        "Marketing Especializado",
+        "Marketing Consumo",
+        "Staff Comercial",
+        "Ventas FFII",
+        "Visita Médica",
+        "Almacenes y Logística",
+        "Distribución",
+        "Finanzas y Contabilidad",
+        "Marcas Propias",
+        "Instituciones / Ventas Corporativas",
+        "Calidad y Asuntos Regulatorios"
+      ],
+      "Consultorios Médicos Chávez": [
+        "Médico, Enfermería y Gerencia"
+      ]
+    };
+
+    const CATALOG_ROLES_BY_AREA = {
+      "Ventas y Operaciones - (Farmacia)": [
+        "Auxiliar de Farmacia",
+        "Regente de Farmacia",
+        "Auxiliar de Almacén y Anfitrión de Sucursal",
+        "Jefatura y Supervisión Operativa de Sucursales"
+      ],
+      "Logística y Distribución / Compras": [
+        "Auxiliar de Logística",
+        "Responsable / Analista de Compras y Adquisiciones",
+        "Jefatura, Coordinación y Analistas de Logística y Distribución",
+        "Auxiliar de Distribución, Reclamos y Montacarga"
+      ],
+      "Comercial y Abastecimiento": [
+        "Operador de Contact Center",
+        "Auxiliar / Analista de Reposición",
+        "Product Manager / Gestión de Categoría, Demanda y Pricing",
+        "Gerencia / Jefatura / Analista Comercial, Trade y Digital",
+        "Supervisión y Regencia de Contact Center",
+        "Analista Junior de Distribución (Contact Center)"
+      ],
+      "Administración y Finanzas": [
+        "Responsable / Auxiliar de Mantenimiento y Limpieza",
+        "Gerencia / Jefatura / Responsable Administrativo y Financiero",
+        "Analista Financiero, Tesorería y Administración",
+        "Auxiliar Contable, Impositivo, Tesorería y Archivo"
+      ],
+      "Auditoría Interna / Control Interno": [
+        "Responsable / Auxiliar de Monitoreo y Seguridad Física",
+        "Gerencia / Responsable / Analista de Auditoría, Control Interno y Seg. Información",
+        "Auxiliar de Inventario / Encargado de Calidad"
+      ],
+      "Talento Humano": ["Talento Humano"],
+      "Tecnología de la Información": ["Tecnología de la Información"],
+      "Marketing y Comunicaciones": ["Equipo de Marketing y Comunicaciones"],
+      "Legal": ["Equipo de Legal"],
+      "Experiencia del Cliente e Inteligencia de Negocios": ["Equipo de Experiencia del Cliente e Inteligencia de Negocios"],
+
+      "Marketing Farma": ["Equipo de Marketing Farma"],
+      "Marketing Especializado": ["Equipo de Marketing Especializado"],
+      "Marketing Consumo": ["Equipo de Marketing Consumo"],
+      "Staff Comercial": [
+        "Gerencia / Jefatura / Supervisión",
+        "KAM",
+        "BI Comercial",
+        "Analista Comercial",
+        "Analista de Marketing",
+        "Asesor Médico"
+      ],
+      "Ventas FFII": [
+        "Vendedor",
+        "Reponedor",
+        "Supervisión / Jefatura de Ventas FFII"
+      ],
+      "Visita Médica": [
+        "Visitador Médico / Representante Médico",
+        "Supervisión de Visita Médica"
+      ],
+      "Almacenes y Logística": [
+        "Auxiliar / Encargado / Supervisor de Almacén y Codificado",
+        "Gerencia / Jefatura / Coordinación de Logística y CD"
+      ],
+      "Distribución": ["Auxiliar / Encargado de Distribución"],
+      "Finanzas y Contabilidad": [
+        "Jefatura / Encargado / Analista Contable y de Tesorería",
+        "Auxiliar de Facturación, Cobranzas y Recepción"
+      ],
+      "Marcas Propias": ["Equipo de Marcas Propias"],
+      "Instituciones / Ventas Corporativas": ["Equipo de Instituciones y Ventas Corporativas"],
+      "Calidad y Asuntos Regulatorios": ["Equipo de Calidad y Asuntos Regulatorios"],
+
+      "Médico, Enfermería y Gerencia": ["Médico", "Enfermería y Gerencia"]
+    };
+
+    const CATALOG_REGIONALS_BY_COMPANY = {
+      "Farmacias Chávez": ["Oriente", "Occidente", "No aplica (Oficina / Transversal)"],
+      "Quimiza": ["Oriente (Santa Cruz)", "Occidente (Cochabamba / La Paz)", "No aplica (Oficina / Transversal)"],
+      "Consultorios Médicos Chávez": ["No aplica (Oficina / Transversal)"]
+    };
+
+    function populateAdminDynamicFilters() {
+      const companySelect = document.getElementById("admin-company-filter");
+      const areaSelect = document.getElementById("admin-area-filter");
+      const roleSelect = document.getElementById("admin-role-filter");
+      const regionalSelect = document.getElementById("admin-regional-filter");
+      if (!companySelect || !areaSelect || !roleSelect || !regionalSelect) return;
+
+      const selectedCompany = companySelect.value;
+      const prevArea = areaSelect.value;
+      const prevRole = roleSelect.value;
+      const prevRegional = regionalSelect.value;
+
+      const validAreas = new Set();
+      let areaHtml = `<option value="ALL">Todas las Áreas</option>`;
+
+      if (selectedCompany === "ALL") {
+        Object.entries(CATALOG_AREAS_BY_COMPANY).forEach(([compName, areasList]) => {
+          const compAreas = new Set(areasList);
+          onlineRecords.filter(r => r.empresa === compName && r.area).forEach(r => compAreas.add(r.area));
+          compAreas.forEach(a => validAreas.add(a));
+          areaHtml += `<optgroup label="${escapeHtml(compName)}">` +
+            Array.from(compAreas).map(a => `<option value="${escapeHtml(a)}">${escapeHtml(a)}</option>`).join("") +
+            `</optgroup>`;
+        });
+      } else {
+        const compAreas = new Set(CATALOG_AREAS_BY_COMPANY[selectedCompany] || []);
+        onlineRecords.filter(r => r.empresa === selectedCompany && r.area).forEach(r => compAreas.add(r.area));
+        compAreas.forEach(a => validAreas.add(a));
+        areaHtml += Array.from(compAreas).map(a => `<option value="${escapeHtml(a)}">${escapeHtml(a)}</option>`).join("");
+      }
+
+      areaSelect.innerHTML = areaHtml;
+      areaSelect.value = validAreas.has(prevArea) ? prevArea : "ALL";
+      const activeArea = areaSelect.value;
+
+      const validRoles = new Set();
+      if (activeArea !== "ALL") {
+        (CATALOG_ROLES_BY_AREA[activeArea] || []).forEach(rl => validRoles.add(rl));
+        onlineRecords
+          .filter(r => (selectedCompany === "ALL" || r.empresa === selectedCompany) && r.area === activeArea && r.rol)
+          .forEach(r => validRoles.add(r.rol));
+      } else if (selectedCompany !== "ALL") {
+        (CATALOG_AREAS_BY_COMPANY[selectedCompany] || []).forEach(a => {
+          (CATALOG_ROLES_BY_AREA[a] || []).forEach(rl => validRoles.add(rl));
+        });
+        onlineRecords
+          .filter(r => r.empresa === selectedCompany && r.rol)
+          .forEach(r => validRoles.add(r.rol));
+      } else {
+        Object.values(CATALOG_ROLES_BY_AREA).forEach(arr => arr.forEach(rl => validRoles.add(rl)));
+        onlineRecords.filter(r => r.rol).forEach(r => validRoles.add(r.rol));
+      }
+
+      roleSelect.innerHTML = `<option value="ALL">Todos los Roles / Equipos</option>` +
+        Array.from(validRoles).map(rl => `<option value="${escapeHtml(rl)}">${escapeHtml(rl)}</option>`).join("");
+      roleSelect.value = validRoles.has(prevRole) ? prevRole : "ALL";
+
+      const regSet = new Set();
+      if (selectedCompany === "ALL") {
+        Object.values(CATALOG_REGIONALS_BY_COMPANY).forEach(arr => arr.forEach(reg => regSet.add(reg)));
+        onlineRecords.forEach(r => { if (r.regional) regSet.add(r.regional); });
+      } else {
+        (CATALOG_REGIONALS_BY_COMPANY[selectedCompany] || []).forEach(reg => regSet.add(reg));
+        onlineRecords.filter(r => r.empresa === selectedCompany).forEach(r => { if (r.regional) regSet.add(r.regional); });
+      }
+
+      regionalSelect.innerHTML = `<option value="ALL">Todas las Regionales</option>` +
+        Array.from(regSet).map(reg => `<option value="${escapeHtml(reg)}">${escapeHtml(reg)}</option>`).join("");
+      regionalSelect.value = regSet.has(prevRegional) ? prevRegional : "ALL";
+    }
+
+    function handleAdminFilterChange(source) {
+      if (source === "company" || source === "area") {
+        populateAdminDynamicFilters();
+      }
+      renderAdminDashboard();
+    }
+
+    function resetAdminFilters() {
+      document.getElementById("admin-company-filter").value = "ALL";
+      document.getElementById("admin-area-filter").value = "ALL";
+      document.getElementById("admin-role-filter").value = "ALL";
+      document.getElementById("admin-regional-filter").value = "ALL";
+      document.getElementById("admin-tenure-filter").value = "ALL";
+      document.getElementById("admin-age-filter").value = "ALL";
+      populateAdminDynamicFilters();
+      renderAdminDashboard();
+    }
+
+    function renderAdminDashboard() {
+      populateAdminDynamicFilters();
+
+      const filterCompany = document.getElementById("admin-company-filter").value;
+      const filterArea = document.getElementById("admin-area-filter").value;
+      const filterRole = document.getElementById("admin-role-filter").value;
+      const filterRegional = document.getElementById("admin-regional-filter").value;
+      const filterTenure = document.getElementById("admin-tenure-filter").value;
+      const filterAge = document.getElementById("admin-age-filter").value;
+
+      const filteredRecords = onlineRecords.filter(r => {
+        if (filterCompany !== "ALL" && r.empresa !== filterCompany) return false;
+        if (filterArea !== "ALL" && r.area !== filterArea) return false;
+        if (filterRole !== "ALL" && r.rol !== filterRole) return false;
+        if (filterRegional !== "ALL" && r.regional !== filterRegional) return false;
+        if (filterTenure !== "ALL" && r.antiguedad !== filterTenure) return false;
+        if (filterAge !== "ALL" && r.rangoEdad !== filterAge) return false;
+        return true;
+      });
+
+      const activeFilterLabels = [];
+      if (filterCompany !== "ALL") activeFilterLabels.push(`Empresa: ${filterCompany}`);
+      if (filterArea !== "ALL") activeFilterLabels.push(`Área: ${filterArea}`);
+      if (filterRole !== "ALL") activeFilterLabels.push(`Rol: ${filterRole}`);
+      if (filterRegional !== "ALL") activeFilterLabels.push(`Regional: ${filterRegional}`);
+      if (filterTenure !== "ALL") activeFilterLabels.push(`Antigüedad: ${filterTenure}`);
+      if (filterAge !== "ALL") activeFilterLabels.push(`Edad: ${filterAge}`);
+
+      document.getElementById("dashboard-subtitle-filter").textContent =
+        activeFilterLabels.length === 0
+          ? "Vista consolidada: Todas las empresas, áreas, regionales, edades y antigüedades"
+          : `Filtros activos · ${activeFilterLabels.join(" | ")}`;
+      document.getElementById("dashboard-export-date").textContent = `Corte: ${new Date().toLocaleDateString("es-BO")}`;
+
+      const totalFiltered = filteredRecords.length;
+      const countFC = filteredRecords.filter(r => r.empresa === "Farmacias Chávez").length;
+      const countQZ = filteredRecords.filter(r => r.empresa === "Quimiza").length;
+      const countCensal = filteredRecords.filter(r => r.empresa === "Consultorios Médicos Chávez").length;
+
+      document.getElementById("kpi-total").textContent = totalFiltered;
+      document.getElementById("kpi-fc").textContent = countFC;
+      document.getElementById("kpi-qz").textContent = countQZ;
+      document.getElementById("kpi-censal").textContent = countCensal;
+
+      const avgGlobal = filteredRecords.length > 0
+        ? (filteredRecords.reduce((acc, r) => acc + (Number(r.promedioGeneral) || 0), 0) / filteredRecords.length).toFixed(2)
+        : "0.00";
+      document.getElementById("kpi-avg").textContent = avgGlobal;
+
+      // Cálculo eNPS (% Promotores [9-10] - % Detractores [1-6])
+      const npsRecords = filteredRecords.filter(r => Number(r.npsScore) >= 1 && Number(r.npsScore) <= 10);
+      if (npsRecords.length > 0) {
+        const promoters = npsRecords.filter(r => Number(r.npsScore) >= 9).length;
+        const detractors = npsRecords.filter(r => Number(r.npsScore) <= 6).length;
+        const promPct = Math.round((promoters / npsRecords.length) * 100);
+        const detPct = Math.round((detractors / npsRecords.length) * 100);
+        const enpsVal = promPct - detPct;
+        document.getElementById("kpi-nps").textContent = (enpsVal > 0 ? "+" : "") + enpsVal;
+        document.getElementById("kpi-nps-detail").textContent = `P: ${promPct}% · D: ${detPct}%`;
+      } else {
+        document.getElementById("kpi-nps").textContent = "0";
+        document.getElementById("kpi-nps-detail").textContent = "P: 0% · D: 0%";
+      }
+
+      const freqCounts = { "Siempre": 0, "Casi siempre": 0, "Algunas veces": 0, "Rara vez": 0, "Nunca": 0 };
+      let totalMatrixAnswers = 0;
+
+      filteredRecords.forEach(rec => {
+        const texts = rec.matrixTexts || {};
+        Object.values(texts).forEach(val => {
+          if (freqCounts[val] !== undefined) {
+            freqCounts[val]++;
+            totalMatrixAnswers++;
+          }
+        });
+      });
+
+      const favorableCount = freqCounts["Siempre"] + freqCounts["Casi siempre"];
+      const favorabilityPct = totalMatrixAnswers > 0 ? Math.round((favorableCount / totalMatrixAnswers) * 100) : 0;
+      document.getElementById("kpi-favorability").textContent = `${favorabilityPct}%`;
+
+      const dimFields = [
+        "promCompromiso",
+        "promServicio",
+        "promSinergia",
+        "promCredibilidad",
+        "promEficiencia",
+        "promAlineacion"
+      ];
+      const dimValues = dimFields.map(f => {
+        if (filteredRecords.length === 0) return 0;
+        const sum = filteredRecords.reduce((acc, r) => acc + (Number(r[f]) || 0), 0);
+        return Number((sum / filteredRecords.length).toFixed(2));
+      });
+
+      const wellnessMap = {};
+      WELLNESS_OPTIONS.forEach(opt => (wellnessMap[opt] = 0));
+      filteredRecords.forEach(r => {
+        if (r.p25Bienestar && wellnessMap[r.p25Bienestar] !== undefined) wellnessMap[r.p25Bienestar]++;
+      });
+      const sortedWellness = Object.entries(wellnessMap).sort((a, b) => b[1] - a[1]);
+
+      renderCharts({
+        dimValues,
+        companyCounts: [countFC, countQZ, countCensal],
+        freqPercentages: MATRIX_COLUMNS.map(col => totalMatrixAnswers > 0 ? Number(((freqCounts[col] / totalMatrixAnswers) * 100).toFixed(1)) : 0),
+        wellnessLabels: sortedWellness.map(item => item[0]),
+        wellnessCounts: sortedWellness.map(item => item[1])
+      });
+
+      renderOpenResponsesAnalysis(filteredRecords);
+
+      const tbody = document.getElementById("admin-records-tbody");
+      if (filteredRecords.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-8 px-4 text-center text-slate-400 text-sm">
+              Aún no hay respuestas registradas en la nube para este filtro.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filteredRecords.map(rec => {
+        const badgeColor =
+          rec.empresa === "Quimiza"
+            ? "bg-orange-50 text-[#EF4A1E] border-orange-200"
+            : rec.empresa === "Farmacias Chávez"
+            ? "bg-sky-50 text-[#064C69] border-sky-200"
+            : "bg-teal-50 text-teal-800 border-teal-200";
+
+        const npsNum = Number(rec.npsScore || 0);
+        const npsBadge = npsNum >= 9
+          ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+          : npsNum >= 7
+          ? "bg-amber-50 text-amber-800 border-amber-200"
+          : npsNum >= 1
+          ? "bg-red-50 text-red-700 border-red-200"
+          : "bg-slate-50 text-slate-500 border-slate-200";
+
+        return `
+          <tr class="hover:bg-slate-50/90 transition">
+            <td class="py-3 px-4 text-slate-500 whitespace-nowrap">${escapeHtml(rec.fechaHora || "")}</td>
+            <td class="py-3 px-4 whitespace-nowrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${badgeColor}">${escapeHtml(rec.empresa || "")}</span>
+            </td>
+            <td class="py-3 px-4 text-slate-700">
+              <span class="font-semibold text-slate-800 block">${escapeHtml(rec.area || "")}</span>
+              <span class="text-xs text-slate-500">${escapeHtml(rec.rol || "")} · ${escapeHtml(rec.zona || "")}</span>
+            </td>
+            <td class="py-3 px-4 text-xs text-slate-600">
+              <span class="block"><strong>Antigüedad:</strong> ${escapeHtml(rec.antiguedad || "N/D")}</span>
+              <span class="block"><strong>Edad:</strong> ${escapeHtml(rec.rangoEdad || "N/D")} · <strong>Cargo:</strong> ${escapeHtml(rec.personalCargo || "N/D")}</span>
+            </td>
+            <td class="py-3 px-4 text-center font-extrabold text-slate-900">${Number(rec.promedioGeneral || 0).toFixed(2)}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold border ${npsBadge}">${npsNum > 0 ? npsNum + "/10" : "N/D"}</span>
+            </td>
+            <td class="py-3 px-4 text-xs text-slate-600 max-w-xs space-y-1">
+              ${rec.p27Fortalezas ? `<p><span class="font-bold text-emerald-700">+</span> ${escapeHtml(rec.p27Fortalezas)}</p>` : ""}
+              ${rec.p28Mejoras ? `<p><span class="font-bold text-[#D95D1E]">-</span> ${escapeHtml(rec.p28Mejoras)}</p>` : ""}
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    const CRITICAL_KEYWORDS = [
+      "acoso", "maltrato", "gritos", "falta de respeto", "irrespeto", "abuso", "humill",
+      "toxic", "tóxic", "renuncia", "renunciar", "desmotiv", "injust", "favoritismo",
+      "sobrecarga", "explota", "agotamiento", "estrés", "estres", "burnout", "represalia",
+      "miedo", "temor", "no escucha", "autoritar", "desigualdad", "discrimin", "ninguna",
+      "nada", "pésim", "pesim", "horrible", "mal clima", "mala comunicación", "mala comunicacion",
+      "falta de liderazgo", "sin apoyo", "no valoran", "no reconocen", "rotación", "rotacion",
+      "sueldo", "salario", "hora extra", "horas extras", "descanso", "personal insuficiente",
+      "falta de personal", "conflictos", "chismes", "ambiente pesado", "hostil"
+    ];
+
+    const THEME_DICTIONARY = [
+      { label: "Liderazgo y Supervisión", keywords: ["líder", "lider", "jefe", "jefatura", "supervisor", "supervisión", "supervision", "gerencia", "autoritar", "guía", "guia"] },
+      { label: "Comunicación Interna", keywords: ["comunicación", "comunicacion", "información", "informacion", "escucha", "claridad", "feedback", "retroalimentación", "retroalimentacion"] },
+      { label: "Carga Laboral y Dotación", keywords: ["carga", "sobrecarga", "personal", "horario", "horas", "turno", "descanso", "estrés", "estres", "tiempo", "presión", "presion"] },
+      { label: "Reconocimiento y Motivación", keywords: ["reconoc", "valoran", "motiva", "incentivo", "bono", "salario", "sueldo", "esfuerzo", "mérito", "merito"] },
+      { label: "Trabajo en Equipo y Respeto", keywords: ["equipo", "compañer", "companer", "respeto", "apoyo", "unión", "union", "colabora", "cordialidad", "confianza", "ambiente"] },
+      { label: "Capacitación y Desarrollo", keywords: ["capacit", "crecimiento", "desarrollo", "ascenso", "formación", "formacion", "aprendizaje", "herramientas", "sistema"] }
+    ];
+
+    function normalizeTextForSearch(str) {
+      return String(str || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function evaluateOpenResponseCriticality(rec) {
+      const p27 = (rec.p27Fortalezas || "").trim();
+      const p28 = (rec.p28Mejoras || "").trim();
+      const p26 = (rec.p26Sugerencias || "").trim();
+      const score = Number(rec.promedioGeneral || 0);
+
+      const combinedNorm = normalizeTextForSearch(`${p27} ${p28} ${p26}`);
+      const p27Norm = normalizeTextForSearch(p27);
+      const p28Norm = normalizeTextForSearch(p28);
+
+      const matchedKeywords = [];
+      CRITICAL_KEYWORDS.forEach(kw => {
+        const kwNorm = normalizeTextForSearch(kw);
+        if (combinedNorm.includes(kwNorm)) {
+          matchedKeywords.push(kw);
+        }
+      });
+
+      const noStrengthSignals = ["ninguna", "ninguno", "nada", "no hay", "no existe", "ningun"];
+      const hasNegativeStrength = noStrengthSignals.some(sig => p27Norm === sig || p27Norm.startsWith(sig + " ") || p27Norm.includes("no hay fortaleza"));
+
+      let severityPoints = 0;
+      const reasons = [];
+
+      if (score > 0 && score <= 2.50) {
+        severityPoints += 4;
+        reasons.push(`Índice crítico (${score.toFixed(2)}/5)`);
+      } else if (score > 2.50 && score <= 3.20) {
+        severityPoints += 2;
+        reasons.push(`Índice bajo (${score.toFixed(2)}/5)`);
+      }
+
+      if (matchedKeywords.length > 0) {
+        severityPoints += Math.min(5, matchedKeywords.length * 2);
+        reasons.push(`Alerta clave: "${matchedKeywords.slice(0, 2).join('", "')}"`);
+      }
+
+      if (hasNegativeStrength) {
+        severityPoints += 3;
+        reasons.push("Sin fortalezas percibidas");
+      }
+
+      const benignImprove = ["ninguna", "ninguno", "nada", "todo bien", "ninguna por el momento", "sin observaciones", "no aplica", "n/a"];
+      const hasSubstantialImprovement = p28.length >= 4 && !benignImprove.includes(p28Norm);
+      const hasRealStrength = p27.length >= 3 && !hasNegativeStrength && p27Norm !== "n/a" && p27Norm !== "no aplica";
+
+      const isCritical = severityPoints >= 3;
+
+      return {
+        isCritical,
+        severityPoints,
+        reasons,
+        matchedKeywords,
+        hasRealStrength,
+        hasSubstantialImprovement,
+        hasNegativeStrength
+      };
+    }
+
+    function renderOpenResponsesAnalysis(filteredRecords) {
+      const criticalListEl = document.getElementById("open-critical-list");
+      const positiveListEl = document.getElementById("open-positive-list");
+      const negativeListEl = document.getElementById("open-negative-list");
+      const themesBarEl = document.getElementById("open-themes-bar");
+
+      if (!criticalListEl || !positiveListEl || !negativeListEl) return;
+
+      const criticalItems = [];
+      const positiveItems = [];
+      const negativeItems = [];
+
+      const themeCounts = THEME_DICTIONARY.map(t => ({ label: t.label, count: 0 }));
+
+      filteredRecords.forEach(rec => {
+        const evalRes = evaluateOpenResponseCriticality(rec);
+        const p27 = (rec.p27Fortalezas || "").trim();
+        const p28 = (rec.p28Mejoras || "").trim();
+        const p26 = (rec.p26Sugerencias || "").trim();
+
+        const fullNorm = normalizeTextForSearch(`${p27} ${p28} ${p26}`);
+        themeCounts.forEach((tc, idx) => {
+          if (THEME_DICTIONARY[idx].keywords.some(kw => fullNorm.includes(normalizeTextForSearch(kw)))) {
+            tc.count++;
+          }
+        });
+
+        if (evalRes.isCritical) {
+          criticalItems.push({ rec, evalRes });
+        }
+
+        if (evalRes.hasRealStrength) {
+          positiveItems.push({ rec, text: p27 });
+        }
+
+        if (evalRes.hasSubstantialImprovement || p26.length >= 4 || evalRes.hasNegativeStrength) {
+          negativeItems.push({
+            rec,
+            p28Text: evalRes.hasNegativeStrength ? `[Alerta en Fortalezas: ${p27}] ${p28}` : p28,
+            p26Text: p26,
+            isCritical: evalRes.isCritical
+          });
+        }
+      });
+
+      criticalItems.sort((a, b) => b.evalRes.severityPoints - a.evalRes.severityPoints);
+
+      document.getElementById("open-badge-critical").textContent = `${criticalItems.length} Crítica${criticalItems.length === 1 ? "" : "s"}`;
+      document.getElementById("open-badge-negative").textContent = `${negativeItems.length} Oportunidad${negativeItems.length === 1 ? "" : "es"} / Negativa${negativeItems.length === 1 ? "" : "s"}`;
+      document.getElementById("open-badge-positive").textContent = `${positiveItems.length} Fortaleza${positiveItems.length === 1 ? "" : "s"} / Positiva${positiveItems.length === 1 ? "" : "s"}`;
+      document.getElementById("critical-stored-counter").textContent = `${criticalItems.length} almacenada${criticalItems.length === 1 ? "" : "s"} en vista actual`;
+      document.getElementById("positive-list-count").textContent = positiveItems.length;
+      document.getElementById("negative-list-count").textContent = negativeItems.length;
+
+      const activeThemes = themeCounts.filter(t => t.count > 0).sort((a, b) => b.count - a.count);
+      if (activeThemes.length > 0) {
+        themesBarEl.innerHTML = `<span class="font-bold text-slate-500 uppercase text-[11px] mr-1">Temas mencionados:</span>` +
+          activeThemes.map(t => `
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-[11px]">
+              <span>${escapeHtml(t.label)}</span>
+              <span class="px-1.5 py-0.2 rounded-full bg-[#064C69] text-white text-[10px] font-bold">${t.count}</span>
+            </span>
+          `).join("");
+      } else {
+        themesBarEl.innerHTML = `<span class="text-[11px] text-slate-400 italic">Aún no hay suficientes comentarios abiertos para agrupar por temática en este filtro.</span>`;
+      }
+
+      if (criticalItems.length === 0) {
+        criticalListEl.innerHTML = `
+          <div class="col-span-full p-4 rounded-xl bg-white/80 border border-red-200/70 text-center text-xs text-slate-500">
+            No se detectaron respuestas abiertas críticas bajo los filtros seleccionados.
+          </div>
+        `;
+      } else {
+        criticalListEl.innerHTML = criticalItems.map(({ rec, evalRes }) => {
+          const scoreVal = Number(rec.promedioGeneral || 0).toFixed(2);
+          const reasonsHtml = evalRes.reasons.map(r =>
+            `<span class="px-2 py-0.5 rounded-md bg-red-100 text-red-800 text-[10px] font-bold">${escapeHtml(r)}</span>`
+          ).join(" ");
+
+          return `
+            <div class="bg-white rounded-xl border-l-4 border-l-red-600 border border-red-200 p-3.5 shadow-2xs space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-1.5">
+                <span class="text-[11px] font-extrabold text-slate-800">
+                  ${escapeHtml(rec.empresa || "")} · <span class="text-[#064C69]">${escapeHtml(rec.area || "")}</span>
+                </span>
+                <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-red-600 text-white">
+                  Índice ${scoreVal}/5
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-500">
+                <strong>Rol:</strong> ${escapeHtml(rec.rol || "N/A")} · <strong>Antigüedad:</strong> ${escapeHtml(rec.antiguedad || "N/D")} · <strong>Edad:</strong> ${escapeHtml(rec.rangoEdad || "N/D")}
+              </p>
+              <div class="flex flex-wrap gap-1">${reasonsHtml}</div>
+              ${rec.p28Mejoras ? `
+                <div class="p-2.5 rounded-lg bg-red-50/70 border border-red-100 text-xs text-slate-800">
+                  <span class="font-bold text-red-800 block text-[11px] uppercase mb-0.5">Oportunidad / Problema reportado:</span>
+                  “${escapeHtml(rec.p28Mejoras)}”
+                </div>
+              ` : ""}
+              ${rec.p26Sugerencias ? `
+                <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/70 text-xs text-slate-700">
+                  <span class="font-bold text-slate-600 text-[11px]">Sugerencia:</span> “${escapeHtml(rec.p26Sugerencias)}”
+                </div>
+              ` : ""}
+              ${rec.p27Fortalezas ? `
+                <p class="text-[11px] text-slate-500 italic">
+                  <strong>Fortaleza citada:</strong> “${escapeHtml(rec.p27Fortalezas)}”
+                </p>
+              ` : ""}
+            </div>
+          `;
+        }).join("");
+      }
+
+      if (positiveItems.length === 0) {
+        positiveListEl.innerHTML = `
+          <div class="p-4 rounded-xl bg-white/80 border border-emerald-200/70 text-center text-xs text-slate-500">
+            No hay fortalezas registradas para el filtro actual.
+          </div>
+        `;
+      } else {
+        positiveListEl.innerHTML = positiveItems.map(({ rec, text }) => `
+          <div class="bg-white rounded-xl border border-emerald-200/90 p-3.5 shadow-2xs space-y-1.5">
+            <div class="flex flex-wrap items-center justify-between gap-1 text-[11px]">
+              <span class="font-bold text-emerald-900">${escapeHtml(rec.empresa || "")} · ${escapeHtml(rec.area || "")}</span>
+              <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                ${Number(rec.promedioGeneral || 0).toFixed(2)}/5
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-500">${escapeHtml(rec.rol || "")} · ${escapeHtml(rec.antiguedad || "")} · ${escapeHtml(rec.rangoEdad || "")}</p>
+            <p class="text-xs sm:text-[13px] text-slate-800 leading-relaxed font-medium">“${escapeHtml(text)}”</p>
+          </div>
+        `).join("");
+      }
+
+      if (negativeItems.length === 0) {
+        negativeListEl.innerHTML = `
+          <div class="p-4 rounded-xl bg-white/80 border border-amber-200/70 text-center text-xs text-slate-500">
+            No hay oportunidades de mejora registradas para el filtro actual.
+          </div>
+        `;
+      } else {
+        negativeListEl.innerHTML = negativeItems.map(({ rec, p28Text, p26Text, isCritical }) => `
+          <div class="bg-white rounded-xl border ${isCritical ? "border-red-300 ring-1 ring-red-200" : "border-amber-200/90"} p-3.5 shadow-2xs space-y-1.5">
+            <div class="flex flex-wrap items-center justify-between gap-1 text-[11px]">
+              <span class="font-bold text-slate-800">${escapeHtml(rec.empresa || "")} · ${escapeHtml(rec.area || "")}</span>
+              <div class="flex items-center gap-1.5">
+                ${isCritical ? `<span class="px-2 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[10px]">CRÍTICA</span>` : ""}
+                <span class="font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                  ${Number(rec.promedioGeneral || 0).toFixed(2)}/5
+                </span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-500">${escapeHtml(rec.rol || "")} · ${escapeHtml(rec.antiguedad || "")} · ${escapeHtml(rec.rangoEdad || "")}</p>
+            ${p28Text ? `
+              <p class="text-xs sm:text-[13px] text-slate-800 leading-relaxed">
+                <span class="font-bold text-[#D95D1E]">Mejora:</span> “${escapeHtml(p28Text)}”
+              </p>
+            ` : ""}
+            ${p26Text ? `
+              <p class="text-xs text-slate-600 leading-relaxed pt-1 border-t border-slate-100">
+                <span class="font-bold text-slate-700">Actividad sugerida:</span> “${escapeHtml(p26Text)}”
+              </p>
+            ` : ""}
+          </div>
+        `).join("");
+      }
+    }
+
+    function renderCharts({ dimValues, companyCounts, freqPercentages, wellnessLabels, wellnessCounts }) {
+      if (typeof Chart === "undefined") return;
+
+      Object.values(chartInstances).forEach(ch => { if (ch) ch.destroy(); });
+
+      const ctxDim = document.getElementById("chart-dimensions").getContext("2d");
+      chartInstances.dimensions = new Chart(ctxDim, {
+        type: "bar",
+        data: {
+          labels: [
+            "Compromiso y Claridad",
+            "Servicio y Reconocimiento",
+            "Sinergia y Desarrollo",
+            "Credibilidad y Confianza",
+            "Eficiencia y Pertenencia",
+            "Alineación Estratégica"
+          ],
+          datasets: [{
+            label: "Promedio (1.00 - 5.00)",
+            data: dimValues,
+            backgroundColor: ["#064C69", "#0A9CDA", "#EF4A1E", "#D95D1E", "#0D9488", "#6366F1"],
+            borderRadius: 8,
+            barThickness: 20
+          }]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: { min: 0, max: 5, grid: { color: "#F1F5F9" }, ticks: { font: { size: 11 } } },
+            y: { grid: { display: false }, ticks: { font: { size: 11, weight: "600" }, color: "#1E293B" } }
+          }
+        }
+      });
+
+      const ctxComp = document.getElementById("chart-companies").getContext("2d");
+      chartInstances.companies = new Chart(ctxComp, {
+        type: "doughnut",
+        data: {
+          labels: ["Farmacias Chávez", "Quimiza", "Consultorios Médicos"],
+          datasets: [{
+            data: companyCounts,
+            backgroundColor: ["#0A9CDA", "#EF4A1E", "#064C69"],
+            borderWidth: 2,
+            borderColor: "#FFFFFF"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          cutout: "62%",
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: { boxWidth: 12, padding: 12, font: { size: 11, weight: "600" } }
+            }
+          }
+        }
+      });
+
+      const ctxFreq = document.getElementById("chart-frequency").getContext("2d");
+      chartInstances.frequency = new Chart(ctxFreq, {
+        type: "bar",
+        data: {
+          labels: MATRIX_COLUMNS,
+          datasets: [{
+            label: "% Respuestas",
+            data: freqPercentages,
+            backgroundColor: ["#0D9488", "#0A9CDA", "#F59E0B", "#F97316", "#EF4444"],
+            borderRadius: 8,
+            barThickness: 32
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { min: 0, max: 100, ticks: { callback: v => v + "%", font: { size: 11 } }, grid: { color: "#F1F5F9" } },
+            x: { grid: { display: false }, ticks: { font: { size: 11, weight: "600" } } }
+          }
+        }
+      });
+
+      const shortWellnessLabels = wellnessLabels.map(l => l.length > 32 ? l.slice(0, 30) + "…" : l);
+      const ctxWell = document.getElementById("chart-wellness").getContext("2d");
+      chartInstances.wellness = new Chart(ctxWell, {
+        type: "bar",
+        data: {
+          labels: shortWellnessLabels,
+          datasets: [{
+            label: "Votos",
+            data: wellnessCounts,
+            backgroundColor: "#064C69",
+            borderRadius: 6,
+            barThickness: 18
+          }]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: { beginAtZero: true, ticks: { precision: 0, font: { size: 11 } }, grid: { color: "#F1F5F9" } },
+            y: { grid: { display: false }, ticks: { font: { size: 11, weight: "500" } } }
+          }
+        }
+      });
+    }
+
+    function exportAdminCSV() {
+      if (!isAdminAuthenticated || onlineRecords.length === 0) {
+        showToast("Sin datos para exportar", "Aún no existen respuestas almacenadas en línea para descargar.", "error");
+        return;
+      }
+
+      const headers = [
+        "ID", "Fecha_Hora", "Empresa", "Area_Homologada", "Rol_Homologado", "Regional_Homologada", "Zona_Departamento_Homologado",
+        "Antiguedad", "Rango_Edad", "Personal_A_Cargo",
+        "P20_1_Texto", "P20_2_Texto", "P20_3_Texto",
+        "P21_1_Texto", "P21_2_Texto", "P21_3_Texto",
+        "P22_1_Texto", "P22_2_Texto", "P22_3_Texto",
+        "P23_1_Texto", "P23_2_Texto", "P23_3_Texto",
+        "P24_1_Texto", "P24_2_Texto", "P24_3_Texto", "P24_4_Texto",
+        "P29_1_Texto", "P29_2_Texto", "P29_3_Texto", "P29_4_Texto", "P29_5_Texto",
+        "P20_1_Num", "P20_2_Num", "P20_3_Num",
+        "P21_1_Num", "P21_2_Num", "P21_3_Num",
+        "P22_1_Num", "P22_2_Num", "P22_3_Num",
+        "P23_1_Num", "P23_2_Num", "P23_3_Num",
+        "P24_1_Num", "P24_2_Num", "P24_3_Num", "P24_4_Num",
+        "P29_1_Num", "P29_2_Num", "P29_3_Num", "P29_4_Num", "P29_5_Num",
+        "Prom_Compromiso_Claridad", "Prom_Servicio_Reconocimiento", "Prom_Sinergia_Desarrollo",
+        "Prom_Credibilidad_Confianza", "Prom_Eficiencia_Pertenencia", "Prom_Alineacion_Estrategica", "Promedio_General",
+        "Actividad_Bienestar", "Actividades_Sugeridas", "Fortalezas", "Oportunidades_Mejora",
+        "eNPS_Puntaje", "eNPS_Categoria"
+      ];
+
+      const allKeys = [
+        "q20_1", "q20_2", "q20_3", "q21_1", "q21_2", "q21_3", "q22_1", "q22_2", "q22_3",
+        "q23_1", "q23_2", "q23_3", "q24_1", "q24_2", "q24_3", "q24_4",
+        "q29_1", "q29_2", "q29_3", "q29_4", "q29_5"
+      ];
+
+      const escapeCsv = (val) => {
+        if (val === undefined || val === null) return '""';
+        return `"${String(val).replace(/"/g, '""').replace(/\r?\n/g, " ")}"`;
+      };
+
+      const rows = [headers.map(escapeCsv).join(",")];
+      onlineRecords.forEach((rec, index) => {
+        const texts = allKeys.map(k => (rec.matrixTexts && rec.matrixTexts[k]) || "");
+        const nums = allKeys.map(k => (rec.matrixNums && rec.matrixNums[k]) || "");
+        rows.push([
+          rec.localId || `ID-${index + 1}`,
+          rec.fechaHora || "",
+          rec.empresa || "",
+          rec.area || "",
+          rec.rol || "",
+          rec.regional || "",
+          rec.zona || "",
+          rec.antiguedad || "",
+          rec.rangoEdad || "",
+          rec.personalCargo || "",
+          ...texts,
+          ...nums,
+          rec.promCompromiso || 0,
+          rec.promServicio || 0,
+          rec.promSinergia || 0,
+          rec.promCredibilidad || 0,
+          rec.promEficiencia || 0,
+          rec.promAlineacion || 0,
+          rec.promedioGeneral || 0,
+          rec.p25Bienestar || "",
+          rec.p26Sugerencias || "",
+          rec.p27Fortalezas || "",
+          rec.p28Mejoras || "",
+          rec.npsScore || "",
+          rec.npsCategory || ""
+        ].map(escapeCsv).join(","));
+      });
+
+      const csvRaw = rows.join("\r\n");
+      const csvContent = "\uFEFF" + csvRaw;
+      const isSandboxedIframe = window.self !== window.top;
+
+      try {
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Resultados_Clima_Laboral_2026_Grupo_Chavez.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (isSandboxedIframe) openCsvFallbackModal(csvRaw, url);
+        else setTimeout(() => URL.revokeObjectURL(url), 2000);
+      } catch (_err) {
+        const dataUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
+        openCsvFallbackModal(csvRaw, dataUri);
+      }
+    }
+
+    async function exportDashboardImage() {
+      const target = document.getElementById("dashboard-capture-area");
+      const btn = document.getElementById("btn-export-png");
+      if (!target || typeof html2canvas === "undefined") return;
+
+      btn.disabled = true;
+      try {
+        const canvas = await html2canvas(target, { scale: 2, backgroundColor: "#E7E7E7", useCORS: true });
+        const dataUrl = canvas.toDataURL("image/png");
+
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = "Dashboard_Clima_Laboral_2026_Grupo_Chavez.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (window.self !== window.top) {
+          document.getElementById("exported-dashboard-img").src = dataUrl;
+          document.getElementById("download-png-anchor").href = dataUrl;
+          document.getElementById("image-preview-modal").classList.remove("hidden");
+        }
+      } catch (err) {
+        console.error("Error exportando imagen:", err);
+        showToast("Error al generar imagen", "No se pudo capturar el dashboard como imagen.", "error");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function exportDashboardPDF() {
+      const target = document.getElementById("dashboard-capture-area");
+      const btn = document.getElementById("btn-export-pdf");
+      if (!target || typeof html2canvas === "undefined" || !window.jspdf) return;
+
+      btn.disabled = true;
+      try {
+        const canvas = await html2canvas(target, { scale: 2, backgroundColor: "#E7E7E7", useCORS: true });
+        const imgData = canvas.toDataURL("image/png");
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+
+        const pageW = pdf.internal.pageSize.getWidth();
+        const pageH = pdf.internal.pageSize.getHeight();
+        const margin = 8;
+        const maxW = pageW - margin * 2;
+        const maxH = pageH - margin * 2;
+
+        const ratio = Math.min(maxW / canvas.width, maxH / canvas.height);
+        const imgW = canvas.width * ratio;
+        const imgH = canvas.height * ratio;
+        const offsetX = (pageW - imgW) / 2;
+        const offsetY = (pageH - imgH) / 2;
+
+        pdf.addImage(imgData, "PNG", offsetX, offsetY, imgW, imgH);
+        pdf.save("Dashboard_Clima_Laboral_2026_Grupo_Chavez.pdf");
+      } catch (err) {
+        console.error("Error exportando PDF:", err);
+        showToast("Error al generar PDF", "No se pudo generar el documento PDF del dashboard.", "error");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function openWebhookModal() {
+      document.getElementById("webhook-url-input").value = getActiveEndpointUrl();
+      document.getElementById("webhook-config-modal").classList.remove("hidden");
+    }
+
+    function closeWebhookModal() {
+      document.getElementById("webhook-config-modal").classList.add("hidden");
+    }
+
+    function saveWebhookUrl() {
+      const urlVal = document.getElementById("webhook-url-input").value.trim();
+      try {
+        if (window.localStorage) {
+          if (urlVal) window.localStorage.setItem(WEBHOOK_STORAGE_KEY, urlVal);
+          else window.localStorage.removeItem(WEBHOOK_STORAGE_KEY);
+        }
+      } catch (_e) {}
+      closeWebhookModal();
+      fetchOnlineRecords(true);
+    }
+
+    function copyAppsScriptCode() {
+      const ta = document.getElementById("apps-script-template");
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("Código copiado", "Pega este código en Extensiones > Apps Script de tu Hoja de Cálculo de Google.", "success");
+      } catch (_e) {}
+    }
+
+    function closeImagePreviewModal() {
+      document.getElementById("image-preview-modal").classList.add("hidden");
+    }
+
+    function openCsvFallbackModal(csvText, downloadHref) {
+      document.getElementById("csv-fallback-textarea").value = csvText;
+      document.getElementById("csv-direct-download-link").href = downloadHref;
+      document.getElementById("csv-fallback-modal").classList.remove("hidden");
+    }
+
+    function closeCsvFallbackModal() {
+      document.getElementById("csv-fallback-modal").classList.add("hidden");
+    }
+
+    function copyCsvToClipboard() {
+      const ta = document.getElementById("csv-fallback-textarea");
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("CSV copiado", "Los datos CSV se copiaron al portapapeles.", "success");
+      } catch (_e) {}
+    }
+
+    function openClearModal() { document.getElementById("clear-form-modal").classList.remove("hidden"); }
+    function closeClearModal() { document.getElementById("clear-form-modal").classList.add("hidden"); }
+    function executeClearForm() {
+      closeClearModal();
+      answers = {};
+      historyStack = [];
+      currentSectionId = 1;
+      applyCompanyTheme("default");
+      renderSection();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showToast(title, msg, type = "error") {
+      const banner = document.getElementById("toast-banner");
+      const icon = document.getElementById("toast-icon");
+      if (type === "success") {
+        banner.className = "mb-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3 shadow-sm animate-section";
+        icon.className = "w-5 h-5 text-emerald-600 shrink-0 mt-0.5";
+      } else {
+        banner.className = "mb-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 flex items-start gap-3 shadow-sm animate-section";
+        icon.className = "w-5 h-5 text-red-600 shrink-0 mt-0.5";
+      }
+      document.getElementById("toast-title").textContent = title;
+      document.getElementById("toast-message").textContent = msg;
+      banner.classList.remove("hidden");
+    }
+
+    function hideToast() { document.getElementById("toast-banner").classList.add("hidden"); }
+
+    function escapeHtml(text) {
+      if (text === undefined || text === null) return "";
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      updateOnlineStatusUI();
+      // Por seguridad, ya no se descargan respuestas al cargar la vista pública
+      if (hasAlreadySubmitted()) {
+        document.getElementById("survey-view").classList.add("hidden");
+        document.getElementById("thankyou-view").classList.remove("hidden");
+      } else {
+        renderSection();
+      }
+    });
+  </script>
+</body>
+</html>
